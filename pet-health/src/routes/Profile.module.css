@@ -1,0 +1,19 @@
+.container{
+    width:100%;
+    height: 500px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows:100px;
+    background-color: rgb(68, 86, 143);
+    margin-bottom: 40px;
+    margin-top: 70px;
+    
+  }
+  .box1{
+    grid-column-start: 1;
+    grid-column-end: 1;
+    grid-row-start: 1;
+    grid-row-end: 3;
+    border: 2px solid white;
+    margin-left: 10px;
+  }
