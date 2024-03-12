@@ -29,10 +29,10 @@ const AddUser = () => {
 
         <>
         <h1>Sign-Up</h1>
-        <Form  method="POST">
+        <Form id="addUser" method="POST">
 
         <label>Email: 
-            <input type="text" name="uaerName" placeholder='enter your email'/>
+            <input type="text" name="userName" placeholder='enter your email'/>
         </label>
         <br/>
         <br/>
