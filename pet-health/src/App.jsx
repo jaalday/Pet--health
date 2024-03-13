@@ -8,7 +8,7 @@ import Home from './routes/Home'
 import About from './routes/About';
 import AddUser, {action as addUserAction} from './routes/AddUser';
 import Profile from './routes/Profile';
-import Login from './routes/Login';
+import Login, {action as loginAction} from './routes/Login';
 
 
 const router = createBrowserRouter([
@@ -39,6 +39,7 @@ const router = createBrowserRouter([
       {
         path: '/login',
         element: <Login/>,
+        action: loginAction,
       }
 
      

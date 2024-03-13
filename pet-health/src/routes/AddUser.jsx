@@ -19,9 +19,19 @@ export async function action({ request }) {
 
     }).then((response) => response.json());
     console.log("added user", addUser);
-    return redirect('/profile');
+    return redirect('/login');
 
 }
+// async function signUpNewUser() {
+//     const { data, error } = await supabase.auth.signUp({
+//       email: 'example@email.com',
+//       password: 'example-password',
+//       options: {
+//         emailRedirectTo: 'https://example.com/welcome',
+//       },
+//     })
+//   }
+  
 
 const AddUser = () => {
 

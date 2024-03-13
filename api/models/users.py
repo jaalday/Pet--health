@@ -7,17 +7,14 @@ from sqlalchemy.orm import mapped_column
 from models.base import Base
 import bcrypt
 
-class User(Base):
-    __tablename__ = 'users'
+class User(BaseModel):
     
-    id = Column(Integer, primary_key=True)
-    email = Column(String(250), unique=True)
-    password = Column(String)
     
-class UserSchema(BaseModel):
    
     email: str
-    password: str
+    password:str
+    
+
     
 
 

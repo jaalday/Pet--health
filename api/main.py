@@ -3,7 +3,8 @@ from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 # from db_connect import session, engine
 # from config import settings
-from models.users import User, UserSchema
+from models.users import User
+# , UserSchema
 # , UserAccountSchema, UserBaseSchema
 from supabase import create_client, Client
 from models.base import Base
@@ -70,7 +71,27 @@ def create_user(email:str, password:str):
     return res
 
 @app.post('/login')
-def login(email:str, password:str):
+def login_user(request: User):
+    print(request)
+    result = supabase.auth.sign_in_with_password({
+        "email": request.email,
+        "password": request.password
+    })
+    return result
+
+@app.post('/profile')
+def add_pet(insert: Pets):
+    print(insert)
+    result = supabase.table('pets').insert({
+        "name": insert.name,
+        "age": insert.age,
+        "species": insert.species,
+        "color": insert.color,
+        # "owner": insert.owner,
+        
+    }).execute()
+    return result
+    
     
 
 

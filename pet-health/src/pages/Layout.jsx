@@ -1,11 +1,11 @@
-import {Outlet, Form, Link} from 'react-router-dom';
+import {Outlet} from 'react-router-dom';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 
 const primaryNav = [
-    {title: 'About', url: '/about'},
+    {title: 'About', url: '/about'}, 
     {title: 'Sign-up', url: '/users/add'},
-    {title: 'Profile', url: '/profile'}
+   
     
 ]
 

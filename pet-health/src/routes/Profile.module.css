@@ -1,19 +1,61 @@
 .container{
     width:100%;
-    height: 500px;
+    height: 700px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-auto-rows:100px;
     background-color: rgb(68, 86, 143);
     margin-bottom: 40px;
     margin-top: 70px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     
   }
   .box1{
     grid-column-start: 1;
     grid-column-end: 1;
     grid-row-start: 1;
-    grid-row-end: 3;
+    grid-row-end: 4;
     border: 2px solid white;
-    margin-left: 10px;
+    margin-left: 50px;
+    margin-top: 50px;
+    margin-bottom: 20px;
+  }
+  .box2{
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 4;
+    grid-row-end: 7;
+    background-color: rgb(210, 217, 224);
+    margin-left: 50px;
+    text-align: center;
+    margin-top: 20px;
+  }
+  .box3{
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 5;
+    background-color: aqua;
+    margin-left: 30%;
+    margin-top: 20px;
+  }
+  .addAnimal{
+    height: 40px;
+    width: 80px;
+    background-color: rgb(71, 197, 73);
+    border-radius: 8px;
+    border: 2px solid rgb(70, 125, 67);
+    margin-top: 30px;
+    cursor: pointer;
+
+  }
+  .addAnimal:hover{
+  
+    background-color: rgb(134, 139, 133);
+  }
+  .input1{
+    border-radius: 10px;
+    width:80%;
+    height: 20px;
+    margin-top: 20px ;
   }

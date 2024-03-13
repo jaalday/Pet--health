@@ -6,23 +6,17 @@ from pydantic import BaseModel
 
 
 
-class Pets(Base):
-    __tablename__= "pets"
-    
-    id = Column(Integer, primary_key=True)
-    name = Column(String)
-    age = Column(String)
-    species = Column(String)
-    health_history = Column(String)
+
     
     
-class PetsSchema(BaseModel):
+class Pets(BaseModel):
     
     name: str
     
     age: str
     species: str
-    health_history: str
+    color: str
+   
     
 class Config:
     populate_by_name = True

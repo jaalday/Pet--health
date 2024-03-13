@@ -1,6 +1,6 @@
 #root {
-  max-width: 1280px;
-  background-color: rgb(215, 214, 211);
+  max-width: 2280px;
+  background-color: rgb(217, 241, 246);
 
   /* padding: 2rem; */
 }
@@ -8,6 +8,7 @@
   padding-top: 20px;
   color: rgb(231, 233, 240);
   padding-left: 20px;
+  margin-left: 100px;
 }
 .navBar {
   /* background-color: aqua; */
@@ -19,18 +20,18 @@
 }
 .nav-text {
   display: flex;
-  margin-left: 40%;
+  margin-left: 65%;
+  margin-right: 27%;
 
-  word-spacing: 20px;
+  /* word-spacing: 5px; */
   margin-top: -20px;
-  font-weight: 20px;
-  /* justify-content: space-between; */
-  /* margin-right: 2%; */
+  /* font-weight: 20px; */
+  /* justify-content: space-around; */
 
-  /* display:inline-block;  */
+  /* display: inline-block; */
 }
 .logo {
-  width: 8%;
+  width: 6%;
   height: 100%;
   float: left;
 }
@@ -38,11 +39,11 @@
   float: right;
   margin-right: 2%;
   height: 40%;
-  width: 7%;
+  width: 6%;
   background-color: rgb(222, 221, 221);
   border-radius: 8px;
   border: 2px solid rgb(70, 125, 67);
-  margin-top: -50px;
+  margin-top: -60px;
   cursor: pointer;
 }
 .sign-in:hover {
@@ -88,32 +89,36 @@ a:hover {
 }
 .banner {
   width: 100%;
-  margin-top: 45px;
+  margin-top: 55px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  transform: scale(-1);
+  -webkit-transform: scaleX(-1);
+
+  
   /* margin-bottom: 15px; */
 }
-/* .image-container {
-  margin-top: 30px;
-  margin-bottom: 40px;
-  width: 100%;
-  display: grid;
-
-  background-color: antiquewhite;
-  /* background-image: url("https://www.mountainsidevet.com/wp-content/uploads/sites/295/2022/08/staff.jpg"); */
 
 .h1 {
-  border: 2px solid white;
-  /* padding-right: 150px; */
-  /* padding-bottom: 20px; */
-  /* padding-top: 7px; */
-  padding-left: 20px;
-  margin-top: 140px;
-  margin-left: 60%;
+  border: 3px solid rgb(83, 178, 55);
+  height: 25%;
+  width: 25%;
 
-  position: absolute;
+
+  margin-left: 63%; 
+  margin-top: -430px;
+  
   color: aliceblue;
   background-color: rgb(44, 63, 101);
   letter-spacing: 1px;
   font-size: 110%;
+  float: left;
+  /* text-align: right; */
+  padding-right: 100px;
+  padding-left: 5%;
+  border-radius: 20px;
+  /* margin-left: 40px; */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  position: relative;
 }
 
 .inner-info1 {
@@ -126,6 +131,7 @@ a:hover {
   color: aliceblue;
   margin-bottom: 10%;
   padding-bottom: 10%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .card-1 {
   width: 30%;
@@ -133,17 +139,18 @@ a:hover {
   /* background-color: aliceblue; */
   display: inline-block;
   margin-left: 30px;
+
   /* background-image: url('https://thumbs.dreamstime.com/b/professional-female-veterinary-nurse-checking-pet-dog-eyes-29924256.jpg'); */
 }
 .img-1 {
   /* margin-top: -15px; */
   width: 100%;
-  height: 300px;
+  height: 400px;
   border: 2px solid white;
 }
 .card-2 {
   width: 30%;
-  height: 350px;
+  height: 450px;
   /* background-color: aliceblue; */
 
   display: inline-block;
@@ -152,7 +159,7 @@ a:hover {
 }
 .img-2 {
   width: 100%;
-  height: 300px;
+  height: 400px;
   margin-top: -15px;
   border: 2px solid white;
 }
@@ -166,17 +173,34 @@ a:hover {
 }
 .img-3 {
   width: 100%;
-  height: 300px;
+  height: 400px;
   margin-top: -15px;
   border: 2px solid white;
-
 }
 
 .about-container {
-  background-color: aqua;
+  /* background-color: aqua; */
   height: 400px;
   width: 100%;
-  margin-bottom: 40px;
+  margin-bottom: 200px;
+  text-align: center;
+
+  /* background-image: url('https://www.antiguavet.com/wp-content/uploads/2019/02/slider_1_home.jpg'); */
+}
+.about-image {
+  width: 100%;
+  height: 500px;
+  margin-top: 55px;
+  padding-bottom: 100px;
+  position: relative;
+}
+.about-text {
+  margin-top: -27%;
+  position: relative;
+  /* margin-left: 20%; */
+  margin-right: 50%;
+  color: rgb(32, 39, 61);
+  margin-left: 5%;
 }
 
 .login-card {
@@ -186,10 +210,14 @@ a:hover {
   text-align: center;
   margin: auto;
   margin-bottom: 20%;
-  margin-top: 45px;
+  margin-top: 200px;
+  border: 4px solid rgb(83, 178, 55);
   padding-bottom: 40px;
   padding-top: 50px;
   color: aliceblue;
+  box-shadow: inset;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .login-button {
   height: 30px;
@@ -203,10 +231,6 @@ a:hover {
 .login-button:hover {
   background-color: rgb(83, 178, 55);
 }
-
-
-
-
 
 @media (orientation: portrait) {
   .nav-text {
@@ -234,22 +258,22 @@ a:hover {
     margin-left: 0;
     text-align: center;
   }
-  .img-1{
+  .img-1 {
     margin-top: 100px;
-    width:100%;
-    height:30%;
+    width: 100%;
+    height: 30%;
   }
-  .img-2{
-    width:100%;
-    height:30%;
+  .img-2 {
+    width: 100%;
+    height: 30%;
     margin-left: 50%;
   }
-  .img-3{
-    width:100%;
-    height:30%;
+  .img-3 {
+    width: 100%;
+    height: 30%;
     margin-bottom: 300px;
   }
-  .inner-info1{
-    height:400px;
+  .inner-info1 {
+    height: 400px;
   }
 }
