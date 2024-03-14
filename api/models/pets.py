@@ -5,17 +5,26 @@ from models.base import Base
 from pydantic import BaseModel
 
 
-
+class Pets(Base):
+    __tablename__ = 'pets'
+    
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    age = Column(String)
+    species = Column(String)
+    color = Column(String)
+    
+    
 
     
     
 class Pets(BaseModel):
     
     name: str
-    
     age: str
     species: str
     color: str
+    # owner_id: str
    
     
 class Config:

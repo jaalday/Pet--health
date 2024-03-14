@@ -1,44 +1,65 @@
-import { Link, Form } from "react-router-dom"
-import { useState, useEffect } from "react"
-import ProfileCSS from "./Profile.module.css"
+import { Link, Form, useActionData, redirect } from "react-router-dom";
+import { useState, useEffect } from "react";
+import ProfileCSS from "./Profile.module.css"; 
+import PetProfile1 from "./PetProfile1";
+import supabase from "../config/supabaseClients";
+import { createClient } from "@supabase/supabase-js";
 
 
-const Profile = ({action}) => {
-    const [input1, setInput1] = useState([]);
-    const [imageURLs, setImageURLs] = useState([]);
 
     
     
+ 
     
-    useEffect(() =>{
-        if(input1.lenght > 1) return;
-        const newImage = [];
-        input1.forEach(image => newImage.push(URL.createObjectURL(image)));
-        setImageURLs(newImage);
-    }, [input1]);
-    
-    const onImageChange = (e) =>{
-        setInput1([...e.target.files]);
-    };
-    const handleSubmit = (e) =>{
-        e.preventDefault();
-        action(input1);
-    }
-    
-    async function action({request}){
+    export async function action({request}){
         const formData = await request.formData();
         const petName = formData.get("petName");
-        const age = formData.get("age");
+        const age = formData.get("petAge");
         const species = formData.get("species");
         const color = formData.get("color");
+        // const owner_id = formData.get("owner_id")
 
 
-        const data = {petName, age, species, color};
-        
+        const data = {name: petName, age, species, color};
+        const url = `${import.meta.env.VITE_SOURCE_URL}/profile`
+        const addPet = await fetch(url, {
+            method:'POST',
+            headers: {
+                "content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        }).then((response) => response.json());
+        console.log('data: ', addPet);
+
+        return redirect('/petprofile1')
+
 
 
 
     }
+    const Profile = () => {
+   
+       
+            const [input1, setInput1] = useState([]);
+            const [imageURLs, setImageURLs] = useState([]);
+        
+            
+            
+            
+            useEffect(() =>{
+                if(input1.lenght > 1) return;
+                const newImage = [];
+                input1.forEach(image => newImage.push(URL.createObjectURL(image)));
+                setImageURLs(newImage);
+            }, [input1]);
+            
+            const onImageChange = (e) =>{
+                setInput1([...e.target.files]);
+            };
+            const handleSubmit = (e) =>{
+                e.preventDefault();
+                action(input1);
+            }
     
 
   
@@ -51,20 +72,18 @@ const Profile = ({action}) => {
         <div className={ProfileCSS.container}>
             
                 <div className={ProfileCSS.box1}>
-                    <Form onSubmit = {handleSubmit}>
-                    <label>
+                <form onSubmit = {handleSubmit}>
+                    <label>Choose Image
                         <br/>
-                        {imageURLs.map(imageSrc => <img className="img"  src={imageSrc}/>)}
                         <input type="file" multiple accept="image/*" onChange={onImageChange} name="image1"/>
-                        
+                        {imageURLs.map(imageSrc => <img className="img"  src={imageSrc}/>)}
                     </label>
-                    
-
-                    </Form>
+                    </form>
+                 
                     </div>
 
                     <div className={ProfileCSS.box2}>
-                    <Form id="addPet">
+                    <Form id="addPet" method="POST">
                        <label >
                         <input className={ProfileCSS.input1}type="text" name="petName" placeholder="Pet Name"/>
                         <br/>
@@ -83,9 +102,9 @@ const Profile = ({action}) => {
             
                     <div className={ProfileCSS.box3}>
                         
-                        <h3>- Pet 1</h3>
-                        <h3>- Pet 2</h3>
-                        <h3>- Pet 3</h3>
+                        <Link to="/petprofile1"><h3>{}</h3></Link>
+                        {/* <h3>- Pet 2</h3>
+                        <h3>- Pet 3</h3> */}
                     </div>
                 </div>
 
@@ -95,6 +114,7 @@ const Profile = ({action}) => {
 
 )
     }
+
 
 
 export default Profile

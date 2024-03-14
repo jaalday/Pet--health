@@ -38,6 +38,7 @@ const AddUser = () => {
     return(
 
         <>
+        <div className='login-card'>
         <h1>Sign-Up</h1>
         <Form id="addUser" method="POST">
 
@@ -46,16 +47,18 @@ const AddUser = () => {
         </label>
         <br/>
         <br/>
-        <label>
+        <label>Password:
             <input type="text" name="password" placeholder='enter your password'/>
         </label>
         <br/>
+        <br/>
         {/* <input type="hidden" name="user_id"/> */}
-        <button type="submit">Sign-up</button>
+        <button className='login-button' type="submit">Sign-up</button>
 
 
 
         </Form>
+        </div>
         
         </>
     )
