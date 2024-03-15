@@ -1,41 +1,23 @@
-import {Outlet} from 'react-router-dom';
-import Navigation from '../components/Navigation';
-import Footer from '../components/Footer';
+import { Outlet } from "react-router-dom";
+import Navigation from "../components/Navigation";
+import Footer from "../components/Footer";
 
 const primaryNav = [
-    {title: 'About', url: '/about'}, 
-    {title: 'Sign-up', url: '/users/add'},
-   
-    
-]
+  { title: "About", url: "/about" },
+  { title: "Sign up", url: "/users/add" },
+  { title: "Profile", url: "/profile" },
+];
 
+const Layout = () => {
+  return (
+    <>
+      <Navigation navItems={primaryNav} />
 
-const Layout =() => {
+      <Outlet />
 
-    return(
+      <Footer />
+    </>
+  );
+};
 
-        <>
-       
-        <Navigation navItems={primaryNav}/>
-        
-     
-      
-        <Outlet/>
-        
-        <Footer/>
-            
-   
-        </>
-        
-
-
-
-    )
-
-
-
-
-
-}
-
-export default Layout
+export default Layout;

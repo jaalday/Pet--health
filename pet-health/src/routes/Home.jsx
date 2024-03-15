@@ -7,18 +7,21 @@ function Home() {
   return (
     <>
       {/* <Navigation/> */}
-    
-     
       {/* <img className="banner"src="https://as2.ftcdn.net/v2/jpg/06/04/83/05/1000_F_604830538_RZwbSE2i0ksmHorOPjr73v51avRUSfDR.jpg"/> */}
       {/* <img className="banner" src="https://www.mountainsidevet.com/wp-content/uploads/sites/295/2022/08/staff.jpg"/> */}
       {/* <img */}
-      
-        <img className="banner"
+      <img
+        className="banner"
         src="https://images.ctfassets.net/rt5zmd3ipxai/4uCsNpmbcgKyzCJUuhpqx5/978bdf8b0b672e963bb63b1ffa47bb26/_mobile__NVA-Clinic-cat-vet-holding-left.jpeg"
-      />   <div className="h1">
-      <h1>Pet MD</h1>
-      
-    </div>
+      />{" "}
+      <div className="h1">
+        <h1>Pet MD</h1>
+        <p>
+          A place to keep track of your
+          <br />
+          pets medical information
+        </p>
+      </div>
       {/* <img
         className="banner"
         src="https://t3.ftcdn.net/jpg/06/94/66/48/360_F_694664845_9HgcrfMeB2gEg5wD5BBYu6lrwRFGaEXy.jpg"

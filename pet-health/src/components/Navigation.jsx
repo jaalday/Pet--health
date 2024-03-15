@@ -3,6 +3,13 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 const Navigation = ({ navItems }) => {
+
+
+
+
+
+
+
   return (
     <>
       <nav>
@@ -28,7 +35,9 @@ const Navigation = ({ navItems }) => {
           <Link to="./login">
             <button className="sign-in">Log In</button>
           </Link>
+         
         </div>
+        
       </nav>
     </>
   );

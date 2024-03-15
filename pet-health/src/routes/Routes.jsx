@@ -1,61 +1,77 @@
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Layout from "../pages/Layout";
+// import "../App.css";
+import Home from "./Home";
+import About from "./About";
+import AddUser, { action as addUserAction } from "../routes/AddUser";
+import Profile, { action as addPetAction } from "../routes/Profile";
+import Login, { action as loginAction } from "../routes/Login";
+import PetProfile1 from "../routes/PetProfile1";
+import Error from "../pages/Error";
+import Logout, {loader as logoutLoader} from "./Logout";
+import { useAuth } from "../AuthContext";
 
-import {createBrowserRouter, RouterProvider} from 'react-router-dom';
-import Layout from '../pages/Layout';
-import '../App.css'
-import Home from '../routes/Home'
-import About from '../routes/About';
-import AddUser, {action as addUserAction} from '../routes/AddUser';
-import Profile, {action as addPetAction} from '../routes/Profile';
-import Login, {action as loginAction} from '../routes/Login';
-import PetProfile1 from '../routes/PetProfile1';
+const Routes = () => {
+  const { isAuth } = useAuth();
 
-
-const router = createBrowserRouter([
-  {
-
-    element: <Layout/>,
-    children:[
-
-      {
-
-      path: '/',
-      element: <Home/>
-      },
-      {
-
-      path: '/about',
-      element: <About/>,
-      },
-      {
-        path: '/users/add',
-        element: <AddUser/>,
-        action: addUserAction,
-      },
-      {
-        path: '/profile',
-        element: <Profile/>,
-        action: addPetAction,
-      },
-      {
-        path: '/login',
-        element: <Login/>,
-        action: loginAction,
-      },
+  const publicRoutes = [
+    {
+      element: <Layout />,
+      errorElement: <Error />,
+      children: [
         {
-          path: '/petprofile1',
-          element: <PetProfile1/>,
+          path: "/",
+          element: <Home />,
+        },
+        {
+          path: "/about",
+          element: <About />,
+        },
+        {
+          path: "/users/add",
+          element: <AddUser />,
+          action: addUserAction,
+        },
+        {
+          path: "/login",
+          element: <Login />,
+          action: loginAction,
+          
+        },
+        {
+            path: "/logout",
+            element: <Logout/>,
+            loader: logoutLoader,
         }
+      ],
+    },
+  ];
 
-     
-    ]
-  }
-])
+  const protectedRoutes = [
+    {
+      element: <Layout />,
+      errorElement: <Error />,
+      children: [
+        {
+          path: "/profile",
+          element: <Profile />,
+          action: addPetAction,
+        },
 
+        {
+          path: "/petprofile1",
+          element: <PetProfile1 />,
+        },
+      ],
+    },
+  ];
 
-function App() {
-  return <RouterProvider router = {router}/>
+  const router = createBrowserRouter([
+    ...publicRoutes,
+    ...(!isAuth ? protectedRoutes : []),
+    ...protectedRoutes,
+  ]);
+  return <RouterProvider router={router} />;
+};
 
- 
-}
-
-export default App
+export default Routes;

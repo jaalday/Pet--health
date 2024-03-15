@@ -16,10 +16,7 @@ function About() {
             information. You can also upload vaccination records so you dont
             have to bring stacks of paper to the vet
           </h3>
-          <h3>
-            Add as many pets as you want to your profile. Add pictures of your
-            pets
-          </h3>
+      
           <h3>
             keep track of any new health issues and concerns with your animal
           </h3>

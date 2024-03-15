@@ -21,7 +21,7 @@
 .nav-text {
   display: flex;
   margin-left: 65%;
-  margin-right: 27%;
+  margin-right: 30%;
 
   /* word-spacing: 5px; */
   margin-top: -20px;
@@ -94,7 +94,6 @@ a:hover {
   transform: scale(-1);
   -webkit-transform: scaleX(-1);
 
-  
   /* margin-bottom: 15px; */
 }
 
@@ -103,10 +102,9 @@ a:hover {
   height: 25%;
   width: 25%;
 
-
-  margin-left: 63%; 
+  margin-left: 63%;
   margin-top: -430px;
-  
+
   color: aliceblue;
   background-color: rgb(44, 63, 101);
   letter-spacing: 1px;

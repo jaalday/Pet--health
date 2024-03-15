@@ -91,6 +91,16 @@ def add_pet(insert: Pets):
         
     }).execute()
     return result
+
+# @app.get('/logout')
+# def sign_out(token):
+    
+#         result = supabase.auth.sign_out({
+#             "token": token
+       
+        
+#     })
+#         return result
     
     
 
