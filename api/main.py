@@ -92,15 +92,24 @@ def add_pet(insert: Pets):
     }).execute()
     return result
 
-# @app.get('/logout')
-# def sign_out(token):
+@app.get('/petprofile1')
+def get_profile_data():
+    response = supabase.table('pets').select("name").execute()
+    return response
+
+@app.get('/logout')
+def sign_out():
     
-#         result = supabase.auth.sign_out({
-#             "token": token
-       
-        
-#     })
+    result = supabase.auth.sign_out()
+              
+    return result       
+  
 #         return result
+# @ app.get("/logout")
+# def logout(request: User):
+#    response = supabase.auth.sign_out
+#    response.delete_cookie("Authorization", domain="localtest.me")
+#    return response
     
     
 
@@ -108,44 +117,11 @@ def add_pet(insert: Pets):
 
 
 
-# @app.post('/users/add')
-# def register_user(payload: UserAccountSchema):
-#     payload.hashed_password = User.hash_password(payload.hashed_password)
-#     return create_user(user=payload)
 
     
-# @app.get('/pets')
-# def get_pets():
-#     name= session.query(Pets)
-#     return name.all()
-
-# @app.post('/users/add')
-# def create_user(user: User):
-    
 
 
 
-# @app.post('/user')
-# def create_new_user(user:User):
-#     try:
-#         user_email = user.email.lower()
-#         hashed_password = bcrypt.hashpw(user.password.encode(), bcrypt.gensalt()).decode()
-#         # user_id = user.id()
-        
-#         if user_exists(value = user_email):
-#             return{"user exitsts already"}
-        
-#         user = supabase.from_("users")\
-#             .insert({"name":user.name, "email": user_email, "password": hashed_password})\
-#             .execute()
-            
-#         if user:
-#             return{"sucessful add"}
-#         else:
-#             return{"error, not added"}
-        
-#     except Exception as e:
-#         return{"user creation failed"}
     
 
                 

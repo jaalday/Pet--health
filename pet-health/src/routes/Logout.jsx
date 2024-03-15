@@ -6,7 +6,7 @@ import { useAuth } from "../AuthContext";
 export async function loader() {
     const url = "http://localhost:8000/logout";
 
-    const access_token = localStorage.gitItem('access_token');
+    const access_token = localStorage.getItem('access_token');
 
     const response = await fetch(url, {
         method: "GET",
@@ -23,27 +23,19 @@ export async function loader() {
 
 const Logout = () => {
 
-    // const response = useLoaderData();
-    // const { setIsAuth } = useAuth();
+    const response = useLoaderData();
+    const { setIsAuth } = useAuth();
 
-    // if (response) {
-    //     localStorage.clear();
-    //     setIsAuth(false);
-    //     return <Navigate to='/'/>;
-    // } else {
-    //     alert ('WOOF WOOF cant log out');
-    //     return <Navigate to='/'/>;
-    // }
-
-    return(
-        <>
-        why wont this fucking work
-        </>
-    )
-
- 
-
+    if (response) {
+        localStorage.clear();
+        setIsAuth(false);
+        return <Navigate to='/'/>;
+    } else {
+        alert ('WOOF WOOF cant log out');
+        return <Navigate to='/'/>;
+    }
 
 }
+
 
 export default Logout;

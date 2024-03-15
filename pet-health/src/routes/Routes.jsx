@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "../pages/Layout";
 // import "../App.css";
 import Home from "./Home";
+import ProtectedRoutesLayout from "../pages/ProtectedRoutesLayout";
 import About from "./About";
 import AddUser, { action as addUserAction } from "../routes/AddUser";
 import Profile, { action as addPetAction } from "../routes/Profile";
@@ -49,12 +50,12 @@ const Routes = () => {
 
   const protectedRoutes = [
     {
-      element: <Layout />,
+      element: <ProtectedRoutesLayout />,
       errorElement: <Error />,
       children: [
         {
           path: "/profile",
-          element: <Profile />,
+          element: <Profile  />,
           action: addPetAction,
         },
 

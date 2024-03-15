@@ -1,17 +1,27 @@
-import { Link, Form, useActionData, redirect, useNavigate } from "react-router-dom";
+import {
+  Link,
+  Form,
+
+  redirect,
+  useNavigate,
+} from "react-router-dom";
 import { useState, useEffect } from "react";
 import ProfileCSS from "./Profile.module.css";
 import PetProfile1 from "./PetProfile1";
 import supabase from "../config/supabaseClients";
 import { SupabaseClient, createClient } from "@supabase/supabase-js";
 
+
+
+
+//adding and creating pet profile data
 export async function action({ request }) {
   const formData = await request.formData();
   const petName = formData.get("petName");
   const age = formData.get("petAge");
   const species = formData.get("species");
   const color = formData.get("color");
-  // const owner_id = formData.get("owner_id")
+
 
   const data = { name: petName, age, species, color };
   const url = `${import.meta.env.VITE_SOURCE_URL}/profile`;
@@ -25,46 +35,46 @@ export async function action({ request }) {
   console.log("data: ", addPet);
 
   return redirect("/petprofile1");
+
+//end of func
+
+
+
+
+
+
+
 }
-
-
 
 const Profile = () => {
 
 
+    //adding image from computer files
+    const [input1, setInput1] = useState([]);
+ 
+    const [imageURLs, setImageURLs] = useState([]);
+    useEffect(() => {
+      if (input1.length > 1) return;
+      const newImage = [];
+      input1.forEach((image) => newImage.push(URL.createObjectURL(image)));
+      setImageURLs(newImage);
+    }, [input1]);
 
-
-
-
-
-
-
-
-
-
-  const [input1, setInput1] = useState([]);
-  const [imageURLs, setImageURLs] = useState([]);
-
-  useEffect(() => {
-    if (input1.lenght > 1) return;
-    const newImage = [];
-    input1.forEach((image) => newImage.push(URL.createObjectURL(image)));
-    setImageURLs(newImage);
-  }, [input1]);
-
-  const onImageChange = (e) => {
-    setInput1([...e.target.files]);
-  };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    action(input1);
-  };
+    const onImageChange = (e) => {
+      setInput1([...e.target.files]);
+    };
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      action(input1);
+    };
 
   return (
     <>
       <div className="profile-card">
         <div className={ProfileCSS.container}>
           <div className={ProfileCSS.box1}>
+
+            {/* form to select files */}
             <form onSubmit={handleSubmit}>
               <label>
                 Choose Image
@@ -77,11 +87,19 @@ const Profile = () => {
                   name="image1"
                 />
                 {imageURLs.map((imageSrc) => (
-                  <img className="img" src={imageSrc} />
-                ))}
-              </label>
+                  <img className="img" src={imageSrc} /> 
+                 ))} 
+                </label>
             </form>
           </div>
+
+          {/* <Form.Group>
+            <Form.Control
+              type="file"
+              accept="image/png, img/jpg"
+              onChange={(e) => uploadImage(e)}
+            />
+          </Form.Group> */}
 
           <div className={ProfileCSS.box2}>
             <Form id="addPet" method="POST">
@@ -126,6 +144,7 @@ const Profile = () => {
 
           <div className={ProfileCSS.box3}>
             <Link to="/petprofile1">
+              pet Name
               <h3>{}</h3>
             </Link>
             {/* <h3>- Pet 2</h3>
@@ -133,10 +152,9 @@ const Profile = () => {
           </div>
         </div>
         <button>
-            <Link to="/logout">ahhhhh</Link>
+          <Link to="/logout">ahhhhh</Link>
         </button>
-        <div>
-      </div>
+        <div></div>
       </div>
     </>
   );

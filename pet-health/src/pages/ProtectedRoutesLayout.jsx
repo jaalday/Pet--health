@@ -6,6 +6,7 @@ import Footer from "../components/Footer";
 const ProtectedRoutesLayout = () => {
   const { isAuth } = useAuth();
   if (!isAuth) {
+    
     return <Navigate to="/login" />;
   }
 
