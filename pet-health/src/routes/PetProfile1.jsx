@@ -4,7 +4,8 @@ import supabase from "../config/supabaseClients";
 import { createClient } from "@supabase/supabase-js";
 
 
-
+//components for pet page
+// import PetCard from "../components/PetProfile";
 
 
 // export async function action () {
@@ -58,7 +59,11 @@ const PetProfile1 = () => {
     }
 
     async function getMedia() {
-        const {data, error} = await supabase.from('Avatars')
+        const {data, error} = await supabase.storage.from('Avatars').filter(userId + '/',{
+            limit: 10,
+        
+
+        });
         if (data) {
             setMedia(data);
         } else {
@@ -78,6 +83,29 @@ const PetProfile1 = () => {
         getMedia();
     }, [userId])
 
+    const [fetchError, setFetchError] = useState(null)
+    const [pets, setPets] = useState(null)
+
+    useEffect(() => {
+        const fetchPets = async () => {
+            const {data, error} = await supabase
+            .from('pets')
+            .select()
+
+            if(error) {
+                setFetchError('could not fetch pets info')
+                setPets(null)
+                console.log(error)
+            }
+            if(data){
+                setPets(data)
+                setFetchError(null)
+            }
+        }
+        fetchPets()
+
+    }, [])
+
 
 
   return (
@@ -86,7 +114,7 @@ const PetProfile1 = () => {
     {media.map((media) => {
           return (<>
             <div>
-              <img src={`https://tgyucrjdklladsjukszn.supabase.co/storage/v1/object/public/Avatars/${media.name}`} />
+              <img src={`https://tgyucrjdklladsjukszn.supabase.co/storage/v1/object/public/Avatars//${media.name}`} />
             </div>
           </>
           )
@@ -112,6 +140,19 @@ const PetProfile1 = () => {
           <li>blabla</li>
         </ul>
       </div>
+        <div>
+        {fetchError && (<p>{fetchError}</p>)}
+
+        {pets && (
+            <div className="pets">
+                {pets.map(pet => (
+                    // {pet.name}
+                    <PetCard key={pet.id} pet={pet} />
+                ))}
+            </div>
+        )}
+        </div>
+
     </>
   );
 };

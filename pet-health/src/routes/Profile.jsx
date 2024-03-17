@@ -10,6 +10,7 @@ import ProfileCSS from "./Profile.module.css";
 import PetProfile1 from "./PetProfile1";
 import supabase from "../config/supabaseClients";
 import { SupabaseClient, createClient } from "@supabase/supabase-js";
+import {v4 as uuidv4} from "uuid";
 
 
 
@@ -50,23 +51,66 @@ const Profile = () => {
 
 
     //adding image from computer files
-    const [input1, setInput1] = useState([]);
+    // const [input1, setInput1] = useState([]);
  
-    const [imageURLs, setImageURLs] = useState([]);
-    useEffect(() => {
-      if (input1.length > 1) return;
-      const newImage = [];
-      input1.forEach((image) => newImage.push(URL.createObjectURL(image)));
-      setImageURLs(newImage);
-    }, [input1]);
+    // const [imageURLs, setImageURLs] = useState([]);
+    // useEffect(() => {
+    //   if (input1.length > 1) return;
+    //   const newImage = [];
+    //   input1.forEach((image) => newImage.push(URL.createObjectURL(image)));
+    //   setImageURLs(newImage);
+    // }, [input1]);
 
-    const onImageChange = (e) => {
-      setInput1([...e.target.files]);
-    };
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      action(input1);
-    };
+    // const onImageChange = (e) => {
+    //   setInput1([...e.target.files]);
+    // };
+    // const handleSubmit = (e) => {
+    //   e.preventDefault();
+    //   action(input1);
+    // };
+    const [userId, setUserId] = useState('');
+    const [media, setMedia] = useState([])
+
+    const getUser = async () =>{
+
+        try {
+            const{data: {user}} = await supabase.auth.getUser()
+            if (user !== null){
+                setUserId(user.id);
+            } else {
+                setUserId('')
+            }
+        } catch (e){(e)}
+    }
+
+    async function uploadImage(e) {
+        let file = e.target.files[0]
+        const {data, error} = await supabase.storage.from('Avatars').upload(userId + '/' + uuidv4(), file)
+
+    if (data) {
+        getMedia();
+    } else {
+        console.log(error)
+    }
+            
+    }
+
+    async function getMedia() {
+        const {data, error} = await supabase.from('Avatars').map(userId + '/',{
+            limit: 10,
+        
+
+        });
+        if (data) {
+            setMedia(data);
+        } else {
+            console.log("image", error)
+        }
+    }
+    useEffect(() => {
+        getUser();
+        getMedia();
+    }, [userId])
 
   return (
     <>
@@ -75,7 +119,7 @@ const Profile = () => {
           <div className={ProfileCSS.box1}>
 
             {/* form to select files */}
-            <form onSubmit={handleSubmit}>
+            {/* <form onSubmit={handleSubmit}>
               <label>
                 Choose Image
                 <br />
@@ -85,13 +129,22 @@ const Profile = () => {
                   accept="image/*"
                   onChange={onImageChange}
                   name="image1"
-                />
-                {imageURLs.map((imageSrc) => (
-                  <img className="img" src={imageSrc} /> 
-                 ))} 
-                </label>
-            </form>
+                /> */}
+             
+                {/* </label>
+            </form> */}
           </div>
+          <input type="file" onChange={(e) => uploadImage(e)}/>
+            {media.map((media) => {
+          return (<>
+            <div>
+              <img src={`https://tgyucrjdklladsjukszn.supabase.co/storage/v1/object/public/Avatars//${media.name}`} />
+            </div>
+          </>
+          )
+        })}
+      
+
 
           {/* <Form.Group>
             <Form.Control
