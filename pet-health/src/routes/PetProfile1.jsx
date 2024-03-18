@@ -2,10 +2,11 @@ import { useState, useEffect } from "react";
 import {v4 as uuidv4} from "uuid";
 import supabase from "../config/supabaseClients";
 import { createClient } from "@supabase/supabase-js";
+import {useUser} from '@supabase/auth-helpers-react';
 
 
 //components for pet page
-// import PetCard from "../components/PetProfile";
+import PetCard from "../components/PetProfile";
 
 
 // export async function action () {
@@ -33,43 +34,33 @@ const PetProfile1 = () => {
 
     const [userId, setUserId] = useState('');
     const [media, setMedia] = useState([])
+  const user = useUser
 
-    const getUser = async () =>{
-
-        try {
-            const{data: {user}} = await supabase.auth.getUser()
-            if (user !== null){
-                setUserId(user.id);
-            } else {
-                setUserId('')
-            }
-        } catch (e){(e)}
-    }
 
     async function uploadImage(e) {
-        let file = e.target.files[0]
-        const {data, error} = await supabase.storage.from('Avatars').upload(userId + '/' + uuidv4(), file)
-
-    if (data) {
-        getMedia();
-    } else {
-        console.log(error)
-    }
-            
-    }
-
-    async function getMedia() {
-        const {data, error} = await supabase.storage.from('Avatars').filter(userId + '/',{
-            limit: 10,
-        
-
-        });
+        let file = e.target.files[0];
+        const { data, error } = await supabase.storage
+          .from("pets")
+          .upload(userId + "/", file);
+    
         if (data) {
-            setMedia(data);
+          setMedia(data);
+          console.log("upload data", data);
+          getMedia();
         } else {
-            console.log("image", error)
+          console.log(error);
         }
-    }
+      }
+      async function getMedia() {
+        const { data, error } = await supabase.storage.from("pets").list(user?.id);
+        console.log("imagedata", data);
+        if (data) {
+          setMedia(data);
+        } else {
+          console.log("error", error);
+        }
+      }
+ 
 
 
 
@@ -79,7 +70,7 @@ const PetProfile1 = () => {
 
 
     useEffect(() => {
-        getUser();
+     
         getMedia();
     }, [userId])
 
@@ -114,7 +105,7 @@ const PetProfile1 = () => {
     {media.map((media) => {
           return (<>
             <div>
-              <img src={`https://tgyucrjdklladsjukszn.supabase.co/storage/v1/object/public/Avatars//${media.name}`} />
+              <img src={`https://tgyucrjdklladsjukszn.supabase.co/storage/v1/object/public/pets/${media.name}`} />
             </div>
           </>
           )
@@ -141,16 +132,22 @@ const PetProfile1 = () => {
         </ul>
       </div>
         <div>
-        {fetchError && (<p>{fetchError}</p>)}
+        <PetCard />
+        {/* {fetchError && (<p>{fetchError}</p>)}
 
         {pets && (
             <div className="pets">
                 {pets.map(pet => (
-                    // {pet.name}
-                    <PetCard key={pet.id} pet={pet} />
+                   
+                    
+                    <li key={pet.id}>
+                        <p>name: {pet.name}</p>
+                        <p>age: {pet.age}</p>
+                    </li>
+                    
                 ))}
             </div>
-        )}
+        )} */}
         </div>
 
     </>

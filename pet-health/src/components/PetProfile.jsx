@@ -1,25 +1,36 @@
-// const PetCard = ({ pets }) => {
+const PetCard = ({ pets }) => {
 
 
-// return (
+return (
 
-//     <>
-//     <div className="petCard">
+    <>
+    <div className="petCard">
+   
 
-//         <h3>{pets.name}</h3>
-//         <h4>{pets.age}</h4>
-//         <h4>{pets.species}</h4>
-//         <h4>{pets.color}</h4>
+    {pets && (
+    <div className="pets">
+        {pets.map(pet => (
+           
+         
+            <li key={pet.id}>
+                <p>name: {pet.name}</p>
+                <p>age: {pet.age}</p>
+            </li>
+            
+        ))}
+    </div>
+)}
 
-//     </div>
-//     </>
-// )
+
+    </div>
+    </>
+)
 
 
 
 
 
 
-// }
+}
 
-// export default PetCard
+export default PetCard

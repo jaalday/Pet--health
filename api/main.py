@@ -55,6 +55,7 @@ def home():
 @app.get('/users')
 def get_user():
     response = supabase.table('profile').select("*").execute()
+    print(response)
     return response
 
 
@@ -94,7 +95,7 @@ def add_pet(insert: Pets):
 
 @app.get('/petprofile1')
 def get_profile_data():
-    response = supabase.table('pets').select("name").execute()
+    response = supabase.table('pets').select("name","age", "species", "color").execute()
     return response
 
 @app.get('/logout')
