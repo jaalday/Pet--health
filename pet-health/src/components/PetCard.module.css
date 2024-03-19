@@ -1,0 +1,24 @@
+.petCard {
+  border: 4px solid rgb(85, 189, 97);
+  margin: auto;
+  width: 50%;
+  text-align: center;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  background-color: rgb(70, 68, 109);
+  color: aliceblue;
+  padding-bottom: 20px;
+}
+
+.button {
+    border: 2px solid green;
+  width: 14%;
+  height: 30px;
+  background-color: rgb(59, 173, 61);
+  border-radius: 8px;
+  
+}
+
+.button:hover {
+    background-color: rgb(134, 139, 133);
+}

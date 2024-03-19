@@ -88,6 +88,7 @@ def add_pet(insert: Pets):
         "age": insert.age,
         "species": insert.species,
         "color": insert.color,
+        "owner_id": insert.owner_id
         # "owner": insert.owner_id,
         
     }).execute()
@@ -103,7 +104,13 @@ def sign_out():
     
     result = supabase.auth.sign_out()
               
-    return result       
+    return result  
+
+@app.get('/history')
+def get_history():
+    response = supabase.table('history').select("medication","pet_name", "surgeries", "food", "vaccinations", "conditions").execute()
+    return response
+
   
 #         return result
 # @ app.get("/logout")

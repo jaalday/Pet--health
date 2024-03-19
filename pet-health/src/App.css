@@ -229,7 +229,14 @@ a:hover {
 .login-button:hover {
   background-color: rgb(83, 178, 55);
 }
+.avatar_pic{
+  width:200px;
 
+}
+.petCard{
+  border: 2-x solid black;
+
+}
 @media (orientation: portrait) {
   .nav-text {
     display: flex;

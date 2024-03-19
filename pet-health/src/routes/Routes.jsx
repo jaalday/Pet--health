@@ -11,7 +11,8 @@ import PetProfile1 from "../routes/PetProfile1";
 import Error from "../pages/Error";
 import Logout, {loader as logoutLoader} from "./Logout";
 import { useAuth } from "../AuthContext";
-import TestPage from "./TestImage";
+
+import History from "../pages/History";
 
 const Routes = () => {
   const { isAuth } = useAuth();
@@ -45,9 +46,10 @@ const Routes = () => {
             element: <Logout/>,
             loader: logoutLoader,
         },
+     
         {
-          path: '/test',
-          element: <TestPage/>
+          path: '/history',
+          element: <History/>
         }
       
       ],

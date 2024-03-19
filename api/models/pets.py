@@ -13,6 +13,7 @@ class Pets(Base):
     age = Column(String)
     species = Column(String)
     color = Column(String)
+    owner_id = Column(String)
     
     
 
@@ -24,7 +25,7 @@ class Pets(BaseModel):
     age: str
     species: str
     color: str
-    # owner_id: str
+    owner_id: str
    
     
 class Config:

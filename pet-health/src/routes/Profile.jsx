@@ -5,20 +5,24 @@ import PetProfile1 from "./PetProfile1";
 import supabase from "../config/supabaseClients";
 import { SupabaseClient, createClient } from "@supabase/supabase-js";
 import { v4 as uuidv4 } from "uuid";
-import {useUser} from '@supabase/auth-helpers-react';
-
-
+import { useUser } from "@supabase/auth-helpers-react";
 
 //adding and creating pet profile data
 
- export async function action({ request }) {
+export async function action({ request }) {
   const formData = await request.formData();
   const petName = formData.get("petName");
   const age = formData.get("petAge");
   const species = formData.get("species");
   const color = formData.get("color");
 
-  const data = { name: petName, age, species, color };
+  const data = {
+    owner_id: localStorage.getItem("user_id"),
+    name: petName,
+    age,
+    species,
+    color,
+  };
   const url = `${import.meta.env.VITE_SOURCE_URL}/profile`;
   const addPet = await fetch(url, {
     method: "POST",
@@ -35,20 +39,42 @@ import {useUser} from '@supabase/auth-helpers-react';
 }
 
 const Profile = () => {
-
   const user = useUser();
 
+  //get user data
+  async function getUser(profile) {
+    const data = { profile };
+    const url = `${import.meta.env.VITE_SOURCE_URL}/users`;
+    const getUser = await fetch(url, {
+      method: "GET",
+      headers: {
+        "content-Type": "application/json",
+      },
+    }).then((response) => response.json());
+    console.log("user data: ", getUser);
 
-  
+    return getUser;
+  }
+  // async function getCurrentUser(currentUserId)
+  //   try{
+  //     const{data, error} = await supabase
+  //       .from('profile')
+  //       .select('*')
+  //       .eq('id', currentUserId)
+  //       .single();
 
+  //     if(error){
+  //       throw error;
+  //     }
+  //     return getCurrentUser;
+  //   }catch(error){
+  //     console.log('error fetching user:',error)
+  //     throw error;
+  //   }
+  // }
 
-
-
-
-  const [userId, setUserId] = useState("");
+  // const [userId, setUserId] = useState("");
   const [media, setMedia] = useState([]);
-
-
 
   async function uploadImage(e) {
     let file = e.target.files[0];
@@ -66,7 +92,9 @@ const Profile = () => {
   }
 
   async function getMedia() {
-    const { data, error } = await supabase.storage.from("Avatars").list(user?.id);
+    const { data, error } = await supabase.storage
+      .from("Avatars")
+      .list(user?.id);
     console.log("imagedata", data);
     if (data) {
       setMedia(data);
@@ -75,9 +103,32 @@ const Profile = () => {
     }
   }
   useEffect(() => {
-    // getUser();
+    getUser();
     getMedia();
-  }, [userId]);
+  }, []);
+
+  // const [fetchError, setFetchError] = useState(null)
+  // const [pets, setPets] = useState(null)
+
+  // useEffect(() => {
+  //     const fetchPets = async () => {
+  //         const {data, error} = await supabase
+  //         .from('pets')
+  //         .select()
+
+  //         if(error) {
+  //             setFetchError('could not fetch pets info')
+  //             setPets(null)
+  //             console.log(error)
+  //         }
+  //         if(data){
+  //             setPets(data)
+  //             setFetchError(null)
+  //         }
+  //     }
+  //     fetchPets()
+
+  // }, [])
 
   return (
     <>
@@ -88,24 +139,14 @@ const Profile = () => {
             {media && (
               <div>
                 <img
+                  className="avatar_pic"
                   src={`https://tgyucrjdklladsjukszn.supabase.co/storage/v1/object/public/Avatars/${media.id}`}
                 />
               </div>
             )}
-
-           
-       
           </div>
 
-          <div>
-            {/* <Form id="image" method="POST">
-
-              <input type="file" accept="image/png, image/jpg" onChange={ (e) => uploadImage(e)}/>
-            </Form> */}
-          </div>
-
-                {/* <p>current user: {profile.email}</p> */}
-        
+          <div></div>
 
           <div className={ProfileCSS.box2}>
             <Form id="addPet" method="POST">
@@ -150,11 +191,28 @@ const Profile = () => {
 
           <div className={ProfileCSS.box3}>
             <Link to="/petprofile1">
-              pet Name
+              <button type="submit"> pet profiles</button>
+             
               <h3>{}</h3>
             </Link>
-            {/* <h3>- Pet 2</h3>
-                        <h3>- Pet 3</h3> */}
+
+            {/* {fetchError && (<p>{fetchError}</p>)}
+    {pets && (
+    <div className="pets">
+        {pets.map(pet => (
+           <>
+           <h1>{pet.name}</h1>
+                <li key={pet.id}>
+                    <p>name: {pet.name}</p>
+                    <p>age: {pet.age}</p>
+                    <p>color: {pet.color}</p>
+                    <p>species: {pet.species}</p>
+                </li>
+                </>
+            
+        ))}
+    </div>
+)} */}
           </div>
         </div>
         <button>
