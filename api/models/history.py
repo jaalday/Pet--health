@@ -10,24 +10,22 @@ class History(Base):
     
     id = Column(Integer, primary_key=True)
     medication = Column(String)
-    pet_name = Column(String)
     surgeries = Column(String)
     food = Column(String)
-    # underlying_conditions = Column(String)
-   
     vaccinations = Column(String)
     conditions = Column(String)
+    pet_name = Column(String)
     
     
 class History(BaseModel):
    
     medication: str
-    pet_name: str
+
     surgeries: str
     food: str
-    # underlying_conditions: str
     vaccinations: str
     conditions: str
+    pet_name: str
     
     
 class Config:

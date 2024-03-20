@@ -41,7 +41,7 @@ export async function action({ request }) {
 const Profile = () => {
   const user = useUser();
 
-  //get user data
+  // get user data
   async function getUser(profile) {
     const data = { profile };
     const url = `${import.meta.env.VITE_SOURCE_URL}/users`;
@@ -52,11 +52,12 @@ const Profile = () => {
       },
     }).then((response) => response.json());
     console.log("user data: ", getUser);
-
+    console.log(data);
     return getUser;
   }
-  // async function getCurrentUser(currentUserId)
-  //   try{
+
+  // async function getUser(currentUserId){
+  //   try {
   //     const{data, error} = await supabase
   //       .from('profile')
   //       .select('*')
@@ -66,11 +67,12 @@ const Profile = () => {
   //     if(error){
   //       throw error;
   //     }
-  //     return getCurrentUser;
+  //     return data;
   //   }catch(error){
   //     console.log('error fetching user:',error)
   //     throw error;
   //   }
+
   // }
 
   // const [userId, setUserId] = useState("");
@@ -80,7 +82,7 @@ const Profile = () => {
     let file = e.target.files[0];
     const { data, error } = await supabase.storage
       .from("Avatars")
-      .upload(Profile.id + "/", file);
+      .upload(user.id + "/", file);
 
     if (data) {
       getMedia(data);
@@ -106,29 +108,6 @@ const Profile = () => {
     getUser();
     getMedia();
   }, []);
-
-  // const [fetchError, setFetchError] = useState(null)
-  // const [pets, setPets] = useState(null)
-
-  // useEffect(() => {
-  //     const fetchPets = async () => {
-  //         const {data, error} = await supabase
-  //         .from('pets')
-  //         .select()
-
-  //         if(error) {
-  //             setFetchError('could not fetch pets info')
-  //             setPets(null)
-  //             console.log(error)
-  //         }
-  //         if(data){
-  //             setPets(data)
-  //             setFetchError(null)
-  //         }
-  //     }
-  //     fetchPets()
-
-  // }, [])
 
   return (
     <>
@@ -187,37 +166,34 @@ const Profile = () => {
                 Add Animal
               </button>
             </Form>
+            <button className={ProfileCSS.logout}>
+              <Link to="/logout">Log Out</Link>
+            </button>
+          </div>
+          {/* <div className={ProfileCSS.box3}>
+              <Form id="addBio" method="POST">
+        
+            <input className={ProfileCSS.inputBio} type="text" name="addBio" placeholder="add a short bio"/>
+            <button>Add</button>
+        
+            </Form>
+            </div> */}
+
+          <br />
+
+  
+
+            <div>
+          <Link to="/petprofile1">
+            <button  className={ProfileCSS.petButton} type="submit"> pet profiles</button>
+          </Link>
           </div>
 
-          <div className={ProfileCSS.box3}>
-            <Link to="/petprofile1">
-              <button type="submit"> pet profiles</button>
-             
-              <h3>{}</h3>
-            </Link>
+          <div className={ProfileCSS.box4}>
 
-            {/* {fetchError && (<p>{fetchError}</p>)}
-    {pets && (
-    <div className="pets">
-        {pets.map(pet => (
-           <>
-           <h1>{pet.name}</h1>
-                <li key={pet.id}>
-                    <p>name: {pet.name}</p>
-                    <p>age: {pet.age}</p>
-                    <p>color: {pet.color}</p>
-                    <p>species: {pet.species}</p>
-                </li>
-                </>
-            
-        ))}
-    </div>
-)} */}
           </div>
         </div>
-        <button>
-          <Link to="/logout">ahhhhh</Link>
-        </button>
+
         <div></div>
       </div>
     </>

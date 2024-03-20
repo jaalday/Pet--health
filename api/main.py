@@ -10,6 +10,7 @@ from supabase import create_client, Client
 from models.base import Base
 from models.pets import Pets
 import random
+from models.history import History
 
 
 
@@ -58,6 +59,12 @@ def get_user():
     print(response)
     return response
 
+@app.get('/pets{id}')
+def get_pets():
+    response = supabase.table('pets').select("*").execute()
+    print(response)
+    return response
+
 
   
 @app.post('/users/add', status_code=status.HTTP_201_CREATED)
@@ -88,15 +95,15 @@ def add_pet(insert: Pets):
         "age": insert.age,
         "species": insert.species,
         "color": insert.color,
-        "owner_id": insert.owner_id
+     
         # "owner": insert.owner_id,
         
     }).execute()
     return result
 
-@app.get('/petprofile1')
+@app.get('/petprofile1/{owner_id}')
 def get_profile_data():
-    response = supabase.table('pets').select("name","age", "species", "color").execute()
+    response = supabase.table('pets').select("*").execute()
     return response
 
 @app.get('/logout')
@@ -110,6 +117,24 @@ def sign_out():
 def get_history():
     response = supabase.table('history').select("medication","pet_name", "surgeries", "food", "vaccinations", "conditions").execute()
     return response
+
+@app.put('/history/{id}')
+def update_history(id: str, update: History):
+    print(update)
+    result = supabase.table('history').update({
+       "medication": update.medication,
+        
+       "surgeries": update.surgeries,
+       "food": update.food,
+       "conditions": update.conditions,
+       "vaccinations": update.vaccinations,
+       "pet_name": update.pet_name,
+       
+    }).eq('id', id).execute()
+    return result
+       
+    
+
 
   
 #         return result

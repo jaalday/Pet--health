@@ -54,9 +54,9 @@ a {
   text-decoration: none;
   color: aliceblue;
 }
-a:hover {
+/* a:hover {
   background-color: rgb(222, 238, 252);
-}
+} */
 
 .footer-box {
   display: grid;
@@ -229,13 +229,11 @@ a:hover {
 .login-button:hover {
   background-color: rgb(83, 178, 55);
 }
-.avatar_pic{
-  width:200px;
-
+.avatar_pic {
+  width: 200px;
 }
-.petCard{
+.petCard {
   border: 2-x solid black;
-
 }
 @media (orientation: portrait) {
   .nav-text {
