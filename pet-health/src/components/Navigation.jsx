@@ -30,7 +30,7 @@ const Navigation = ({ navItems }) => {
                 About
               </Link>
               <Link to="/users/add" className="nav-text">
-                Sign-up
+                Signup
               </Link>
               {isAuth ? (
                 <Link to="/profile" className="nav-text">

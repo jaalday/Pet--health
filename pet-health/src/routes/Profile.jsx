@@ -119,7 +119,7 @@ const Profile = () => {
               <div>
                 <img
                   className="avatar_pic"
-                  src={`https://tgyucrjdklladsjukszn.supabase.co/storage/v1/object/public/Avatars/${media.id}`}
+                  src={`https://tgyucrjdklladsjukszn.supabase.co/storage/v1/object/public/Avatars/${media.name}`}
                 />
               </div>
             )}
@@ -181,16 +181,25 @@ const Profile = () => {
 
           <br />
 
-  
-
-            <div>
-          <Link to="/petprofile1">
-            <button  className={ProfileCSS.petButton} type="submit"> pet profiles</button>
-          </Link>
+          <div className={ProfileCSS.box3}>
+            <Link to="/petprofile1">
+              <button className={ProfileCSS.petButton} type="submit">
+                pet profiles
+              </button>
+              <p>Click here to view all your pets information!</p>
+            </Link>
           </div>
 
-          <div className={ProfileCSS.box4}>
-
+          <div className={ProfileCSS.box4}></div>
+          <div className={ProfileCSS.box5}>
+            <img
+              className={ProfileCSS.imgBanner}
+              src="https://www.vetspetclinic.com/userfiles/images/banner/leading-spaying-and-neutering-5.jpg"
+            />
+            {/* <img
+              className={ProfileCSS.imgBanner}
+              src="https://www.petsnvets.org/images/headers/ph4l/47334_NEW-PH4L_Web_Internal_1920x489_PetsnVets.jpg"
+            /> */}
           </div>
         </div>
 

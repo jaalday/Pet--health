@@ -27,7 +27,7 @@ const PetCard = () => {
 
   //
   const userId = localStorage.getItem("user_id");
-  
+
   const [media, setMedia] = useState([]);
   const user = useUser;
 
@@ -75,7 +75,7 @@ const PetCard = () => {
                           <div>
                             <img
                               className="avatar_pic"
-                              src={`https://tgyucrjdklladsjukszn.supabase.co/storage/v1/object/public/pets/${media.id}`}
+                              src={`https://tgyucrjdklladsjukszn.supabase.co/storage/v1/object/public/pets/${media.name}`}
                             />
                           </div>
                         </>

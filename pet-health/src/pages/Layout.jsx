@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 
 const primaryNav = [
   { title: "About", url: "/about" },
-  { title: "Sign up", url: "/users/add" },
+  { title: "Signup", url: "/users/add" },
   { title: "Profile", url: "/profile" },
 ];
 

@@ -1,13 +1,15 @@
 .petCard {
-  border: 4px solid rgb(85, 189, 97);
+  border: 4px solid rgb(51, 118, 59);
   margin: auto;
   width: 50%;
+ 
   text-align: center;
   margin-top: 5%;
   margin-bottom: 5%;
   background-color: rgb(68, 86, 143);
   color: aliceblue;
   padding-bottom: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .button {
@@ -21,4 +23,10 @@
 
 .button:hover {
     background-color: rgb(134, 139, 133);
+}
+.inputBox{
+  display: inline-block;
+  width:40%;
+  height: 40%;
+  background-color: antiquewhite;
 }

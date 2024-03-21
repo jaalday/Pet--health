@@ -118,12 +118,12 @@ def get_history():
     response = supabase.table('history').select("medication","pet_name", "surgeries", "food", "vaccinations", "conditions").execute()
     return response
 
-@app.put('/history/{id}')
-def update_history(id: str, update: History):
+@app.put('/history/put')
+def update_history( id:str, update: History):
     print(update)
     result = supabase.table('history').update({
-       "medication": update.medication,
-        
+    
+       "medication": update.medication, 
        "surgeries": update.surgeries,
        "food": update.food,
        "conditions": update.conditions,
