@@ -1,8 +1,8 @@
 .petCard {
-  border: 4px solid rgb(51, 118, 59);
+  border: 4px solid rgb(62, 148, 72);
   margin: auto;
   width: 50%;
- 
+
   text-align: center;
   margin-top: 5%;
   margin-bottom: 5%;
@@ -10,23 +10,69 @@
   color: aliceblue;
   padding-bottom: 20px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  word-spacing: 3px;
+  letter-spacing: 1px;
 }
 
 .button {
-    border: 2px solid green;
+  border: 2px solid green;
   width: 14%;
   height: 30px;
   background-color: rgb(59, 173, 61);
   border-radius: 8px;
-  
+  cursor: pointer;
+  align-items: center;
+  margin-left: 55px;
 }
 
 .button:hover {
-    background-color: rgb(134, 139, 133);
+  background-color: rgb(134, 139, 133);
 }
-.inputBox{
+.inputBox {
   display: inline-block;
-  width:40%;
-  height: 40%;
-  background-color: antiquewhite;
+  width: 30%;
+  border: 4px solid rgb(62, 148, 72);
+  /* height: 300px; */
+  background-color: rgb(210, 217, 224);
+  align-items: center;
+  margin-left: 10%;
+  margin-bottom: 5%;
+}
+.medInfo {
+  display: inline-block;
+}
+.inputConcerns {
+  width: 200px;
+  height: 50px;
+  border-radius: 8px;
+}
+.inputSquares {
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+.deleteimg {
+  width: 10%;
+}
+.delete {
+  float: right;
+  margin-right: 20px;
+  border-radius: 100%;
+  /* border: 2px solid white; */
+  cursor: pointer;
+  background-color: rgb(51, 157, 18);
+  padding-top: 5px;
+
+  /* background-image: url('https://cdn3.vectorstock.com/i/1000x1000/25/27/trash-can-icon-vector-25322527.jpg'); */
+}
+.delete:hover {
+  background-color: grey;
+}
+.petInfo {
+  /* display: inline-block; */
+  text-align: center;
+}
+.petImage {
+  display: inline-block;
+  margin-left: 70px;
+  /* margin-right: 20px; */
 }

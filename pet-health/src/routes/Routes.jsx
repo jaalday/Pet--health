@@ -11,7 +11,7 @@ import PetProfile1 from "../routes/PetProfile1";
 import Error from "../pages/Error";
 import Logout, {loader as logoutLoader} from "./Logout";
 import { useAuth } from "../AuthContext";
-
+import AddHistory from "../components/AddHistory";
 import History from "../pages/History";
 
 const Routes = () => {
@@ -49,8 +49,13 @@ const Routes = () => {
      
         {
           path: '/history',
-          element: <History/>
+          element: <History/>,
+        },
+        {
+          path: '/addhistory',
+          element: <AddHistory/>
         }
+      
       
       ],
     },

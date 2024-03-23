@@ -96,10 +96,30 @@ def add_pet(insert: Pets):
         "species": insert.species,
         "color": insert.color,
      
-        # "owner": insert.owner_id,
+         "owner_id": insert.owner_id,
         
     }).execute()
     return result
+
+@app.post('/profile{owner_id}')
+def add_history(insert: History):
+    print(insert)
+    result = supabase.table('history').insert({
+        "pet_name": insert.pet_name,
+        "owner_id_history": insert.owner_id_history,
+        # "id": id,
+        "medications": insert.medication,
+        "surgeries": insert.surgeries,
+        "food": insert.food,
+        "conditions": insert.conditions,
+        "vaccinations": insert.vaccinations,
+        
+        
+        
+        
+    }).execute()
+    return result
+
 
 @app.get('/petprofile1/{owner_id}')
 def get_profile_data():

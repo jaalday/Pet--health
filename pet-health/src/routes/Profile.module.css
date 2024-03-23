@@ -33,6 +33,8 @@
   text-align: center;
   margin-top: 20px;
   margin-right: 40%;
+  border: 4px solid rgb(62, 148, 72);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .box3 {
   grid-column-start: 3;
@@ -72,7 +74,7 @@
 }
 .imgBanner {
   width: 100%;
-  /* height: 100%; */
+  height: 140%;
 }
 .addAnimal {
   height: 40px;

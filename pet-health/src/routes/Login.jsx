@@ -138,7 +138,7 @@ const Login = () => {
           <input type="text" name="email" placeholder="Enter Email" />
           <br />
           <br />
-          <input type="text" name="password" placeholder="Enter Password" />
+          <input type="password" name="password" placeholder="Enter Password" />
           <br />
           <br />
           <button type="submit" className="login-button">

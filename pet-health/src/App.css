@@ -17,12 +17,13 @@
   border-bottom: 4px solid rgb(69, 161, 41);
   background-color: rgb(51, 67, 115);
   margin-top: -19px;
+  /* position: fixed; */
 }
 .nav-text {
   display: flex;
   margin-left: 65%;
   margin-right: 30%;
-
+  /* text-align: center; */
   /* word-spacing: 5px; */
   margin-top: -20px;
   /* font-weight: 20px; */
