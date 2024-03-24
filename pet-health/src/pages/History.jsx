@@ -172,7 +172,7 @@ const History = () => {
                       }}
                     />
 
-                    <input type="hidden" value={history.owner_history_id} onClick={() =>{history.owner_history_id}}/>
+                    <input type="hidden" value={history.owner_id} onClick={() =>{history.owner_history_id}}/>
                     <br />
                     <input
                       className={PetCardCSS.inputSquares}

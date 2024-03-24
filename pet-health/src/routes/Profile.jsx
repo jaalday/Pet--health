@@ -120,44 +120,9 @@ const Profile = () => {
     return getUser;
   }
 
-  // async function getUser(currentUserId){
-  //   try {
-  //     const{data, error} = await supabase
-  //       .from('profile')
-  //       .select('*')
-  //       .eq('id', currentUserId)
-  //       .single();
 
-  //     if(error){
-  //       throw error;
-  //     }
-  //     return data;
-  //   }catch(error){
-  //     console.log('error fetching user:',error)
-  //     throw error;
-  //   }
 
-  // }
-  // const userId = localStorage.getItem("user_id")
-  // const [userId, setUserId] = useState("");
-  // const [media, setMedia] = useState([]);
 
-  // async function uploadImage(e) {
-  //   // let user = useUser
-  //   let file = e.target.files[0];
-  //   const fileName = file.name;
-  //   const { data, error } = await supabase.storage
-  //     .from("Avatars")
-  //     .upload(userId + "/", fileName, file);
-
-  //   if (data) {
-  //     getMedia(data);
-  //     console.log("upload data", data);
-  //     setMedia();
-  //   } else {
-  //     console.log(error);
-  //   }
-  // }
   const [images, setImages] = useState([]);
   const user = localStorage.getItem("user_id");
   console.log("user:", user);
@@ -210,6 +175,37 @@ const Profile = () => {
       getImages();
     }
   }
+  const [medication, setMedication] = useState("");
+  const [surgeries, setSurgeries] = useState("");
+  const [food, setFood] = useState("");
+  const [conditions, setConditions] = useState("");
+  const [vaccinations, setVaccines] = useState("");
+  // const [history_id, setId] = useState();
+  const [concerns, setConcerns] = useState("");
+
+  const handleSubmit = async ({historyId}) => {
+    
+
+    const {data, error} = await supabase
+      .from('history')
+      .insert({
+        medication,
+        surgeries,
+        food,
+        conditions,
+        vaccinations,
+        concerns,
+      })
+      if(error){
+        console.log(error)
+      }
+      if(data){
+        console.log(data)
+      }
+
+
+  }
+
 
 
 
@@ -297,27 +293,94 @@ const Profile = () => {
               <Link to="/logout">Log Out</Link>
             </button>
 
-            <Form id="addHistory"method="POST">
+            {/* <Form id="addHistory"method="POST">
                               <input type="text" name="pet_name" placeholder="pet name"/>
                               <input type="text" name="medications" placeholder="medications"/>
                               <input type="text" name="vaccinations" placeholder="vaccines"/>
                               <input type="text" name="surgeries" placeholder="surgeries"/>
                               <input type="text" name="food" placeholder="food"/>
                               <input type="text" name="conditions" placeholder="preexisting conditions"/>
-                              <input type="text" name="concerns" placeholder="any concerns?"/>
+                              <input type="text" name="concerns" placeholder="any concerns?"/> */}
                               {/* <input type="hidden" name="id" value={pet.id}/> */}
-                           <button name="addHistory" type="submit">add history</button>  
-              </Form>
+                           {/* <button name="addHistory" type="submit">add history</button>  
+              </Form> */}
+              <Form method="PUT" onSubmit={() => handleSubmit({petId: pet.id})}>
+                    <input
+                      // className={PetCardCSS.inputSquares}
+                      type="hidden"
+                      name="id"
+                      value={history.id}
+                      onClick={() => {
+                        history.id
+                      }}
+                    />
+
+                    <input type="hidden" value={history.owner_id} onClick={() =>{history.owner_history_id}}/>
+                    <br />
+                    <input
+                      // className={PetCardCSS.inputSquares}
+                      type="text"
+                      name="petMedicine"
+                      placeholder="medicine"
+                      onChange={(e) => setMedication(e.target.value)}
+                    />
+                    <br />
+                    <input
+                      // className={PetCardCSS.inputSquares}
+                      type="text"
+                      name="petVaccinations"
+                      placeholder="vaccines"
+                      onChange={(e) => setVaccines(e.target.value)}
+                    />
+                    <br />
+                    <input
+                      // className={PetCardCSS.inputSquares}
+                      type="text"
+                      name="petSurgeries"
+                      placeholder="surgeries"
+                      onChange={(e) => setSurgeries(e.target.value)}
+                    />
+                    <br />
+                    <input
+                      // className={PetCardCSS.inputSquares}
+                      type="text"
+                      name="diet"
+                      placeholder="food"
+                      onChange={(e) => setFood(e.target.value)}
+                    />
+                    <br />
+                    <input
+                      // className={PetCardCSS.inputSquares}
+                      type="text"
+                      name="conditions"
+                      placeholder="preexisting conditions"
+                      onChange={(e) => setConditions(e.target.value)}
+                    />
+                    <br />
+                    <input
+                      type="hidden"
+                      // name="pet_name"
+                      // placeholder="pet name"
+                      // onChange={(e) => setPet_name(e.target.value)}
+                    />
+                    <br />
+                    <input
+                      // className={PetCardCSS.inputConcerns}
+                      type="text"
+                      name="new concerns"
+                      placeholder="any new symptoms or concerns?"
+                      onChange={(e) => setConcerns(e.target.value)}
+                    />
+                    <br />
+                    {/* <Link to="/history"> */}
+                    <button name="addHistory">Update</button>
+                    {/* </Link> */}
+                  </Form>
+              
               
           </div>
-          {/* <div className={ProfileCSS.box3}>
-              <Form id="addBio" method="POST">
-        
-            <input className={ProfileCSS.inputBio} type="text" name="addBio" placeholder="add a short bio"/>
-            <button>Add</button>
-        
-            </Form>
-            </div> */}
+          
+
 
           <br />
 
