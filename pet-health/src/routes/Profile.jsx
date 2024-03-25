@@ -189,6 +189,7 @@ const Profile = () => {
     const {data, error} = await supabase
       .from('history')
       .insert({
+        // id: pet.id,
         medication,
         surgeries,
         food,
@@ -304,9 +305,14 @@ const Profile = () => {
                               {/* <input type="hidden" name="id" value={pet.id}/> */}
                            {/* <button name="addHistory" type="submit">add history</button>  
               </Form> */}
+         
+              
+              
+          </div>
+          <div className={ProfileCSS.box3}>
               <Form method="PUT" onSubmit={() => handleSubmit({petId: pet.id})}>
                     <input
-                      // className={PetCardCSS.inputSquares}
+                      className={ProfileCSS.input1}
                       type="hidden"
                       name="id"
                       value={history.id}
@@ -318,15 +324,15 @@ const Profile = () => {
                     <input type="hidden" value={history.owner_id} onClick={() =>{history.owner_history_id}}/>
                     <br />
                     <input
-                      // className={PetCardCSS.inputSquares}
+                      className={ProfileCSS.input2}
                       type="text"
                       name="petMedicine"
-                      placeholder="medicine"
+                      placeholder="medications"
                       onChange={(e) => setMedication(e.target.value)}
                     />
                     <br />
                     <input
-                      // className={PetCardCSS.inputSquares}
+                      className={ProfileCSS.input2}
                       type="text"
                       name="petVaccinations"
                       placeholder="vaccines"
@@ -334,7 +340,7 @@ const Profile = () => {
                     />
                     <br />
                     <input
-                      // className={PetCardCSS.inputSquares}
+                     className={ProfileCSS.input2}
                       type="text"
                       name="petSurgeries"
                       placeholder="surgeries"
@@ -342,15 +348,15 @@ const Profile = () => {
                     />
                     <br />
                     <input
-                      // className={PetCardCSS.inputSquares}
+                      className={ProfileCSS.input2}
                       type="text"
                       name="diet"
-                      placeholder="food"
+                      placeholder="diet"
                       onChange={(e) => setFood(e.target.value)}
                     />
                     <br />
                     <input
-                      // className={PetCardCSS.inputSquares}
+                     className={ProfileCSS.input2}
                       type="text"
                       name="conditions"
                       placeholder="preexisting conditions"
@@ -363,9 +369,9 @@ const Profile = () => {
                       // placeholder="pet name"
                       // onChange={(e) => setPet_name(e.target.value)}
                     />
-                    <br />
+                   
                     <input
-                      // className={PetCardCSS.inputConcerns}
+                     className={ProfileCSS.input2}
                       type="text"
                       name="new concerns"
                       placeholder="any new symptoms or concerns?"
@@ -373,29 +379,27 @@ const Profile = () => {
                     />
                     <br />
                     {/* <Link to="/history"> */}
-                    <button name="addHistory">Update</button>
+                    <button className={ProfileCSS.addAnimal2}name="addHistory">Update</button>
                     {/* </Link> */}
                   </Form>
-              
-              
-          </div>
+                  </div>
           
 
 
           <br />
 
-          <div className={ProfileCSS.box3}>
+          <div className={ProfileCSS.box4}>
             <Link to="/petprofile1">
               <button className={ProfileCSS.petButton} type="submit">
-                pet profiles
+                <p>pet profiles</p>
               </button>
-              <p>Click here to view all your pets information!</p>
+              
             </Link>
           </div>
 
-          <div className={ProfileCSS.box4}>
+          {/* <div className={ProfileCSS.box4}>
           
-          </div>
+          </div> */}
           <div className={ProfileCSS.box5}>
             <img
               className={ProfileCSS.imgBanner}

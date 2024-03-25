@@ -107,8 +107,8 @@ def add_history(insert: History):
     result = supabase.table('history').insert({
         "pet_name": insert.pet_name,
         "owner_id_history": insert.owner_id_history,
-        # "id": id,
-        "medications": insert.medication,
+        "id": id,
+        "medications": insert.medications,
         "surgeries": insert.surgeries,
         "food": insert.food,
         "conditions": insert.conditions,
@@ -121,7 +121,7 @@ def add_history(insert: History):
     return result
 
 
-@app.get('/petprofile1/{owner_id}')
+@app.get('/petprofile1')
 def get_profile_data():
     response = supabase.table('pets').select("*").execute()
     return response
