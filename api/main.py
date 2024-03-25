@@ -101,13 +101,13 @@ def add_pet(insert: Pets):
     }).execute()
     return result
 
-@app.post('/profile{owner_id}')
+@app.post('/profile/history')
 def add_history(insert: History):
     print(insert)
     result = supabase.table('history').insert({
         "pet_name": insert.pet_name,
-        "owner_id_history": insert.owner_id_history,
-        "id": id,
+        "owner_id": insert.owner_id,
+        "id": insert.id,
         "medications": insert.medications,
         "surgeries": insert.surgeries,
         "food": insert.food,
@@ -143,7 +143,7 @@ def update_history( id:str, update: History):
     print(update)
     result = supabase.table('history').update({
     
-       "medication": update.medication, 
+       "medication": update.medications, 
        "surgeries": update.surgeries,
        "food": update.food,
        "conditions": update.conditions,

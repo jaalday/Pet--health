@@ -42,6 +42,13 @@ const History = () => {
   //   return addHistory;
   // };
 
+
+
+
+
+
+
+
   async function getPetsId() {
     const url = `${import.meta.env.VITE_SOURCE_URL}/pets${id}`;
     const getPetsId = await fetch(url, {
@@ -54,6 +61,30 @@ const History = () => {
 
     return getPetsId;
   }
+
+  const user = localStorage.getItem("user_id");
+
+  const [pets, setPets] = useState(null);
+  useEffect(() => {
+    const fetchPets = async () => {
+      const { data, error } = await supabase
+        .from("pets")
+        .select("id")
+        .eq("owner_id", user);
+
+      if (error) {
+        setFetchError("could not fetch pets info");
+        setPets(null);
+        console.log(error);
+      }
+      if (data) {
+        setPets(data);
+        console.log(data);
+        setFetchError(null);
+      }
+    };
+    fetchPets();
+  }, []);
 
   // async function getHistory() {
   //   const data = {};
@@ -81,9 +112,9 @@ const History = () => {
   const [vaccinations, setVaccines] = useState("");
   // const [history_id, setId] = useState();
   const [concerns, setConcerns] = useState("");
-  // const [pet_name, setPet_name] = useState("");
+  const [pet_name, setPet_name] = useState("");
 
-  const handleSubmit = async ({historyId}) => {
+  const handleSubmit = async ({ historyId }) => {
     // e.preventDefault();
 
     const { data, error } = await supabase
@@ -105,6 +136,44 @@ const History = () => {
     if (data) {
       console.log(data);
     }
+  };
+
+  const handleSubmit2 = async () => {
+    // e.preventDefault();
+
+    const { data, error } = await supabase
+      .from("history")
+      // .select(history.id)
+      .insert({
+        
+        pet_name,
+        medication,
+        surgeries,
+        food,
+        conditions,
+        vaccinations,
+        concerns,
+        
+      })
+      // .eq("id", historyId);
+
+    if (error) {
+      ("error");
+    }
+    if (data) {
+      console.log(data);
+    }
+    const url = `${import.meta.env.VITE_SOURCE_URL}/profile/history`;
+    const addHistory = await fetch(url, {
+  
+      method: "POST",
+      headers: {
+        "content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    }).then((response) => response.json());
+    console.log("History:", addHistory);
+    return addHistory
   };
 
   //updating supabase data straight from the front end
@@ -140,6 +209,7 @@ const History = () => {
 
   return (
     <>
+    
       {fetchError && <p>{fetchError}</p>}
       {history && (
         <div className="pets">
@@ -161,18 +231,27 @@ const History = () => {
                   <br />
                 </div>
                 <div className={PetCardCSS.inputBox}>
-                  <Form method="PUT" onSubmit={() => handleSubmit({historyId: history.id})}>
+                  <Form
+                    method="PUT"
+                    onSubmit={() => handleSubmit({ historyId: history.id })}
+                  >
                     <input
                       // className={PetCardCSS.inputSquares}
                       type="hidden"
                       name="id"
                       value={history.id}
                       onClick={() => {
-                        history.id
+                        history.id;
                       }}
                     />
 
-                    <input type="hidden" value={history.owner_id} onClick={() =>{history.owner_history_id}}/>
+                    <input
+                      type="hidden"
+                      value={history.owner_id}
+                      onClick={() => {
+                        history.owner_history_id;
+                      }}
+                    />
                     <br />
                     <input
                       className={PetCardCSS.inputSquares}
@@ -234,6 +313,7 @@ const History = () => {
                     {/* </Link> */}
                   </Form>
                 </div>
+                
               </div>
               {/* </li> */}
             </>

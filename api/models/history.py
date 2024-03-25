@@ -15,19 +15,21 @@ class History(Base):
     vaccinations = Column(String)
     conditions = Column(String)
     pet_name = Column(String)
-    owner_id_history = Column(String)
+    owner_id = Column(String, ForeignKey('pets.owner_id'))
+    pet_id = Column(String,  ForeignKey('pets.id'))
     
     
 class History(BaseModel):
    
+  
+  
     medications: str
-    id: str
     surgeries: str
     food: str
     vaccinations: str
     conditions: str
     pet_name: str
-    owner_id_history: str
+    owner_id: str
     
     
 class Config:
