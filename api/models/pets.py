@@ -14,6 +14,7 @@ class Pets(Base):
     species = Column(String)
     color = Column(String)
     owner_id = Column(String)
+   
     
     
 
@@ -26,6 +27,7 @@ class Pets(BaseModel):
     species: str
     color: str
     owner_id: str
+ 
    
     
 class Config:

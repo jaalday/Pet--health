@@ -6,18 +6,54 @@
   text-align: center;
   margin-top: 5%;
   margin-bottom: 5%;
-  background-color: rgb(68, 86, 143);
+  /* background-color: rgb(49, 64, 114); */
   color: aliceblue;
   padding-bottom: 20px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   word-spacing: 3px;
   letter-spacing: 1px;
+  background-image: linear-gradient(
+    to bottom,
+    rgb(85, 85, 190),
+    rgb(43, 60, 114)
+  );
 }
+.petCard1 {
+  /* display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 100px; */
+  align-items: center;
+  margin: auto;
+  border: 4px solid rgb(62, 148, 72);
+ 
+  text-align: center;
+  width:40%;
+  /* height:300px; */
+  margin-top: 20px;
+  color: aliceblue;
+  padding-bottom: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  word-spacing: 3px;
+  letter-spacing: 1px;
+  background-image: linear-gradient(
+    to bottom,
+    rgb(85, 85, 190),
+    rgb(43, 60, 114)
+  );
+}
+/* .box1{
+  margin-top: 30%;
+  grid-column-start: 2;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 3;
+  border: 2px solid white;
+} */
 
 .button {
   border: 2px solid green;
-  width: 14%;
-  height: 30px;
+  width: 80px;
+  height: 40px;
   background-color: rgb(59, 173, 61);
   border-radius: 8px;
   cursor: pointer;
@@ -55,12 +91,15 @@
 }
 .delete {
   float: right;
-  margin-right: 20px;
-  border-radius: 100%;
+  margin-right: 10px;
+  /* border-radius: 90%; */
+
+  border-radius: 50%;
   /* border: 2px solid white; */
   cursor: pointer;
   background-color: rgb(51, 157, 18);
-  padding-top: 5px;
+  /* padding-top: 5px; */
+  /* margin-bottom: 20px; */
 
   /* background-image: url('https://cdn3.vectorstock.com/i/1000x1000/25/27/trash-can-icon-vector-25322527.jpg'); */
 }
@@ -68,11 +107,15 @@
   background-color: grey;
 }
 .petInfo {
-  /* display: inline-block; */
-  text-align: center;
+ /* display: inline-block;  */
+ border: 4px solid rgb(56, 170, 71);
+ border-radius: 10px;
+  margin-left: 40px;
+  margin-right: 40px;
+  
 }
 .petImage {
-  display: inline-block;
-  margin-left: 70px;
-  /* margin-right: 20px; */
+  width: 250px;
+  margin-bottom: 40px;
+
 }

@@ -95,8 +95,8 @@ def add_pet(insert: Pets):
         "age": insert.age,
         "species": insert.species,
         "color": insert.color,
-     
-         "owner_id": insert.owner_id,
+       
+        "owner_id": insert.owner_id,
         
     }).execute()
     return result

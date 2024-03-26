@@ -86,33 +86,21 @@ const History = () => {
     fetchPets();
   }, []);
 
-  // async function getHistory() {
-  //   const data = {};
-  //   const url = `http://localhost:8000/history`;
-  //   const getHistory = await fetch(url, {
-  //     method: "GET",
-  //     headers: {
-  //       "content-Type": "application/json",
-  //     },
-  //     // body: JSON.stringify(data),
-  //   }).then((response) => response.json());
-  //   console.log("health-data", data);
-  //   return getHistory;
-  // }
+
 
   const { id } = useParams();
 
   const [fetchError, setFetchError] = useState([]);
   const [history, setHistory] = useState([]);
 
-  const [medication, setMedication] = useState("");
+  const [medications, setMedication] = useState("");
   const [surgeries, setSurgeries] = useState("");
   const [food, setFood] = useState("");
   const [conditions, setConditions] = useState("");
   const [vaccinations, setVaccines] = useState("");
-  // const [history_id, setId] = useState();
+
   const [concerns, setConcerns] = useState("");
-  const [pet_name, setPet_name] = useState("");
+ 
 
   const handleSubmit = async ({ historyId }) => {
     // e.preventDefault();
@@ -121,7 +109,7 @@ const History = () => {
       .from("history")
       // .select(history.id)
       .update({
-        medication,
+        medications,
         surgeries,
         food,
         conditions,
@@ -138,43 +126,43 @@ const History = () => {
     }
   };
 
-  const handleSubmit2 = async () => {
-    // e.preventDefault();
+  // const handleSubmit2 = async () => {
+  //   // e.preventDefault();
 
-    const { data, error } = await supabase
-      .from("history")
-      // .select(history.id)
-      .insert({
+  //   const { data, error } = await supabase
+  //     .from("history")
+  //     // .select(history.id)
+  //     .insert({
         
-        pet_name,
-        medication,
-        surgeries,
-        food,
-        conditions,
-        vaccinations,
-        concerns,
+  //       pet_name,
+  //       medication,
+  //       surgeries,
+  //       food,
+  //       conditions,
+  //       vaccinations,
+  //       concerns,
         
-      })
-      // .eq("id", historyId);
+  //     })
+  //     // .eq("id", historyId);
 
-    if (error) {
-      ("error");
-    }
-    if (data) {
-      console.log(data);
-    }
-    const url = `${import.meta.env.VITE_SOURCE_URL}/profile/history`;
-    const addHistory = await fetch(url, {
+  //   if (error) {
+  //     ("error");
+  //   }
+  //   if (data) {
+  //     console.log(data);
+  //   }
+  //   const url = `${import.meta.env.VITE_SOURCE_URL}/profile/history`;
+  //   const addHistory = await fetch(url, {
   
-      method: "POST",
-      headers: {
-        "content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    }).then((response) => response.json());
-    console.log("History:", addHistory);
-    return addHistory
-  };
+  //     method: "POST",
+  //     headers: {
+  //       "content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(data),
+  //   }).then((response) => response.json());
+  //   console.log("History:", addHistory);
+  //   return addHistory
+  // };
 
   //updating supabase data straight from the front end
 
@@ -221,7 +209,7 @@ const History = () => {
                 <div className={PetCardCSS.medInfo}>
                   {/* <h3>Id: {history.id}</h3> */}
 
-                  <h3>medication: {history.medication}</h3>
+                  <h3>medication: {history.medications}</h3>
 
                   <h3>vaccinations: {history.vaccinations}</h3>
                   <h3>surgeries: {history.surgeries}</h3>
@@ -234,6 +222,8 @@ const History = () => {
                   <Form
                     method="PUT"
                     onSubmit={() => handleSubmit({ historyId: history.id })}
+                     
+                   
                   >
                     <input
                       // className={PetCardCSS.inputSquares}
@@ -249,14 +239,14 @@ const History = () => {
                       type="hidden"
                       value={history.owner_id}
                       onClick={() => {
-                        history.owner_history_id;
+                        history.owner_id;
                       }}
                     />
                     <br />
                     <input
                       className={PetCardCSS.inputSquares}
                       type="text"
-                      name="petMedicine"
+                      name="medications"
                       placeholder="medicine"
                       onChange={(e) => setMedication(e.target.value)}
                     />
@@ -264,7 +254,7 @@ const History = () => {
                     <input
                       className={PetCardCSS.inputSquares}
                       type="text"
-                      name="petVaccinations"
+                      name="vaccinations"
                       placeholder="vaccines"
                       onChange={(e) => setVaccines(e.target.value)}
                     />
@@ -272,7 +262,7 @@ const History = () => {
                     <input
                       className={PetCardCSS.inputSquares}
                       type="text"
-                      name="petSurgeries"
+                      name="surgeries"
                       placeholder="surgeries"
                       onChange={(e) => setSurgeries(e.target.value)}
                     />
@@ -280,7 +270,7 @@ const History = () => {
                     <input
                       className={PetCardCSS.inputSquares}
                       type="text"
-                      name="diet"
+                      name="food"
                       placeholder="food"
                       onChange={(e) => setFood(e.target.value)}
                     />
@@ -295,7 +285,7 @@ const History = () => {
                     <br />
                     <input
                       type="hidden"
-                      // name="pet_name"
+                      name="pet_name"
                       // placeholder="pet name"
                       // onChange={(e) => setPet_name(e.target.value)}
                     />
@@ -303,19 +293,19 @@ const History = () => {
                     <input
                       className={PetCardCSS.inputConcerns}
                       type="text"
-                      name="new concerns"
+                      name="concerns"
                       placeholder="any new symptoms or concerns?"
                       onChange={(e) => setConcerns(e.target.value)}
                     />
                     <br />
-                    {/* <Link to="/history"> */}
+                   
                     <button name="addHistory">Update</button>
-                    {/* </Link> */}
+                  
                   </Form>
                 </div>
                 
               </div>
-              {/* </li> */}
+            
             </>
           ))}
         </div>
