@@ -15,33 +15,37 @@ const PetImages = ({ petId }) => {
 
   useEffect(() => {
     async function getImages(petId) {
-      const { data, error } = await supabase.storage
+      const { data, error, isLoading } = await supabase.storage
         .from("pets")
         .list(userId + "/" + petId + "/", {
           limit: 100,
           offset: 0,
           sortBy: { column: "name", order: "asc" },
         });
+      console.log("isLoading", isLoading);
       if (data !== null) {
         setImages(data);
         return data;
       } else {
-        console.log(error);
+        setImages(null);
       }
     }
+
     getImages(petId);
   }, [petId]);
-console.log("images", images)
+
+  console.log("images", images);
+
+  if (images.length < 1)
+    return (
+      <img src="https://t3.ftcdn.net/jpg/01/79/88/20/360_F_179882080_Zga46fOuCNnZlF9o2IC6gYgHVQFDVKMv.jpg" />
+    );
   return (
-    <div >
+    <div>
       {images.map((image) => {
-        console.log("image", image)
-        if(image.name === ".emptyFolderPlaceholder")return null;
-        
+        if (image.name === ".emptyFolderPlaceholder") return null;
 
         return (
-          
-         
           <img
             key={image.name}
             className={PetCardCSS.petImage}
@@ -53,9 +57,18 @@ console.log("images", images)
   );
 };
 
+const deleteImage = async () => {
+  const { error } = await supabase.from("pets").delete(fileKey);
+
+  if (error) {
+    error;
+  }
+};
+
 const PetCard = () => {
   const [fetchError, setFetchError] = useState(null);
   const [pets, setPets] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchPets = async () => {
@@ -67,11 +80,10 @@ const PetCard = () => {
       if (error) {
         setFetchError("could not fetch pets info");
         setPets(null);
-        console.log(error);
+        error;
       }
       if (data) {
         setPets(data);
-        console.log(data);
         setFetchError(null);
       }
     };
@@ -82,46 +94,24 @@ const PetCard = () => {
 
   async function uploadImage(e, petId) {
     let file = e.target.files[0];
-    const { data, error } = await supabase.storage
-      .from("pets")
-      .upload(`${userId}/${petId}/${uuidv4()}`, file);
 
-    if (data) {
-      // getImages(petId);
-    } else {
-      console.log(error);
+    try {
+      setIsLoading(true);
+      await supabase.storage
+        .from("pets")
+        .upload(`${userId}/${petId}/${uuidv4()}`, file);
+    } catch {
+      setIsLoading(false);
+    } finally {
+      setIsLoading(false);
     }
   }
-  // ))
-
-  // async function getMedia() {
-  //   const { data, error } = await supabase.storage.from("pets").list(user?.id);
-  //   console.log("imagedata", data);
-  //   if (data) {
-  //     setMedia(data);
-  //   } else {
-  //     console.log("error", error);
-  //   }
-  // }
 
   const handleDelete = async ({ petId }) => {
     const { data, error } = await supabase
       .from("pets")
       .delete()
       .eq("id", petId);
-
-    if (error) {
-      console.log(error);
-    }
-    if (data) {
-      console.log(data);
-    }
-  };
-
-  const fileKey = 'BUCKET_URL + userId + "/" + petId + "/" + image.name';
-
-  const deleteImage = async () => {
-    const { data, error } = await supabase.from("pets").delete(fileKey);
 
     if (error) {
       console.log(error);
@@ -140,7 +130,7 @@ const PetCard = () => {
             {pets.map((pet) => (
               <div key={pet.id}>
                 <div className={PetCardCSS.petCard1}>
-                  <h1>{pet.name}</h1>
+                  <h1 className={PetCardCSS.name}>{pet.name}</h1>
                   <form>
                     <label htmlFor="photo"></label>
                     <input
@@ -151,21 +141,24 @@ const PetCard = () => {
                     />
                   </form>
                   <div>
-                    <PetImages petId={pet.id} />
+                    {isLoading ? (
+                      <div className={PetCardCSS.loader}></div>
+                    ) : (
+                      <PetImages petId={pet.id} />
+                    )}
                   </div>
 
-                  {/* <p>name: {pet.name}</p> */}
                   <div className={PetCardCSS.petInfo}>
                     <p>age: {pet.age}</p>
                     <p>color: {pet.color}</p>
                     <p>species: {pet.species}</p>
+                    <Link to={"/history"}>
+                      <button type="submit" className={PetCardCSS.button}>
+                        history
+                      </button>
+                    </Link>
                   </div>
 
-                  <Link to={"/history"}>
-                    <button type="submit" className={PetCardCSS.button}>
-                      history
-                    </button>
-                  </Link>
                   <button
                     className={PetCardCSS.delete}
                     type="submit"

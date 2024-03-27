@@ -1,54 +1,10 @@
 import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import supabase from "../config/supabaseClients";
-// import PetProfile1 from "../routes/PetProfile1";
 import PetCardCSS from "../components/PetCard.module.css";
-import { Form, Link } from "react-router-dom";
+import { Form } from "react-router-dom";
 
 const History = () => {
-  // const handleSubmit = async (e) => {e.preventDefault()
-  //   const formData = new FormData ;
-  //   const medication = formData.get("petMedicine");
-  //   const vaccinations = formData.get("petVaccinations");
-  //   const surgeries = formData.get("surgeries");
-  //   const food = formData.get("diet");
-  //   const conditions = formData.get("conditions");
-  //   const pet_name = formData.get("pet_name");
-  //   const id = formData.get("pet_id");
-  //   console.log({ id });
-  //   console.log({ vaccinations });
-  //   console.log({ food });
-  //   console.log({ conditions });
-  //   const data = {
-  //     id,
-  //     medication,
-  //     vaccinations,
-  //     surgeries,
-  //     food,
-  //     conditions,
-  //     pet_name,
-  //   };
-  //   console.log({ data });
-  //   const url = `${import.meta.env.VITE_SOURCE_URL}/history/put`;
-  //   const addHistory = await fetch(url, {
-  //     method: "PUT",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(data),
-  //   }).then((response) => response.json());
-
-  //   console.log("history data", addHistory);
-  //   return addHistory;
-  // };
-
-
-
-
-
-
-
-
   async function getPetsId() {
     const url = `${import.meta.env.VITE_SOURCE_URL}/pets${id}`;
     const getPetsId = await fetch(url, {
@@ -57,8 +13,6 @@ const History = () => {
         "content-Type": "application/json",
       },
     }).then((response) => response.json());
-    console.log("pet Data: ", getPetsId);
-
     return getPetsId;
   }
 
@@ -75,11 +29,9 @@ const History = () => {
       if (error) {
         setFetchError("could not fetch pets info");
         setPets(null);
-        console.log(error);
       }
       if (data) {
         setPets(data);
-        console.log(data);
         setFetchError(null);
       }
     };
@@ -103,11 +55,9 @@ const History = () => {
  
 
   const handleSubmit = async ({ historyId }) => {
-    // e.preventDefault();
 
     const { data, error } = await supabase
       .from("history")
-      // .select(history.id)
       .update({
         medications,
         surgeries,
@@ -126,48 +76,6 @@ const History = () => {
     }
   };
 
-  // const handleSubmit2 = async () => {
-  //   // e.preventDefault();
-
-  //   const { data, error } = await supabase
-  //     .from("history")
-  //     // .select(history.id)
-  //     .insert({
-        
-  //       pet_name,
-  //       medication,
-  //       surgeries,
-  //       food,
-  //       conditions,
-  //       vaccinations,
-  //       concerns,
-        
-  //     })
-  //     // .eq("id", historyId);
-
-  //   if (error) {
-  //     ("error");
-  //   }
-  //   if (data) {
-  //     console.log(data);
-  //   }
-  //   const url = `${import.meta.env.VITE_SOURCE_URL}/profile/history`;
-  //   const addHistory = await fetch(url, {
-  
-  //     method: "POST",
-  //     headers: {
-  //       "content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(data),
-  //   }).then((response) => response.json());
-  //   console.log("History:", addHistory);
-  //   return addHistory
-  // };
-
-  //updating supabase data straight from the front end
-
-  /// trying to print only the data that relates to the pets that i own
-
   useEffect(() => {
     const fetchHistory = async () => {
       const owner_id = localStorage.getItem("user_id");
@@ -181,7 +89,6 @@ const History = () => {
         setFetchError("could not fetch history info");
         setHistory(null);
         console.log(error);
-        // navigate("/petProfile1");
       }
       if (data) {
         setHistory(data);

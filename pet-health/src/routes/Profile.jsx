@@ -1,22 +1,16 @@
-import { Link, Form, redirect, useNavigate } from "react-router-dom";
+import { Link, Form } from "react-router-dom";
 import { useState, useEffect } from "react";
 import ProfileCSS from "./Profile.module.css";
-import PetProfile1 from "./PetProfile1";
 import supabase from "../config/supabaseClients";
-import { SupabaseClient, createClient } from "@supabase/supabase-js";
 import { v4 as uuidv4 } from "uuid";
-import { useUser } from "@supabase/auth-helpers-react";
-
-//adding and creating pet profile data
-const user = localStorage.getItem("user_id");
 
 export async function action({ request }) {
   const formData = await request.formData();
-  console.log("form data", formData);
   const petName = formData.get("petName");
   const age = formData.get("petAge");
   const species = formData.get("species");
   const color = formData.get("color");
+  const empty_pic = formData.get("empty_pic");
 
   const data = {
     owner_id: localStorage.getItem("user_id"),
@@ -24,6 +18,7 @@ export async function action({ request }) {
     age,
     species,
     color,
+    empty_pic,
   };
   const url = `${import.meta.env.VITE_SOURCE_URL}/profile`;
 
@@ -34,53 +29,51 @@ export async function action({ request }) {
     },
     body: JSON.stringify(data),
   }).then((response) => response.json());
-  console.log("Petdata: ", addPet);
-
   return addPet;
-}
-
-async function getPet() {
-  const url = `${import.meta.env.VITE_SOURCE_URL}/pets{id}`;
-  const getPet = await fetch(url, {
-    method: "GET",
-    headers: {
-      "content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  }).then((response) => response.json());
-
 }
 
 const BUCKET_URL =
   "https://tgyucrjdklladsjukszn.supabase.co/storage/v1/object/public/Avatars/";
 
 const Profile = () => {
-  // let user = useUser();
-  // const user = localStorage.getItem("user_id")
   const [fetchError, setFetchError] = useState(null);
   const [pets, setPets] = useState("");
+  const [isCurrentPetsLength, setIsCurrentPetsLength] = useState(
+    pets.length ?? 1
+  );
+
+  const fetchPets = async () => {
+    const { data, error } = await supabase
+      .from("pets")
+      .select()
+      .eq("owner_id", user);
+
+    if (error) {
+      setFetchError("could not fetch pets info");
+      setPets(null);
+    }
+    if (data) {
+      setPets(data);
+      setFetchError(null);
+    }
+  };
+
+  const callFetchPets = async () =>
+    await fetchPets().catch(() => console.log("error"));
+
   useEffect(() => {
-    const fetchPets = async () => {
-      const { data, error } = await supabase
-        .from("pets")
-        .select()
-        .eq("owner_id", user);
+    if (pets.length === isCurrentPetsLength || isCurrentPetsLength === 0)
+      return undefined;
+    if (pets.length !== isCurrentPetsLength) {
+      callFetchPets();
+    }
+  }, [isCurrentPetsLength, pets]);
 
-      if (error) {
-        setFetchError("could not fetch pets info");
-        setPets(null);
-        // console.log(error);
-      }
-      if (data) {
-        setPets(data);
-
-        setFetchError(null);
-      }
-    };
-    fetchPets();
+  useEffect(() => {
+    if (!pets) {
+      callFetchPets();
+    }
   }, []);
-
-  console.log(pets);
 
   // get user data
   async function getUser(profile) {
@@ -92,14 +85,12 @@ const Profile = () => {
         "content-Type": "application/json",
       },
     }).then((response) => response.json());
-    console.log("user data: ", getUser);
     console.log(data);
     return getUser;
   }
 
   const [images, setImages] = useState([]);
   const user = localStorage.getItem("user_id");
-  console.log("user:", user);
 
   async function getImages() {
     const { data, error } = await supabase.storage
@@ -150,32 +141,31 @@ const Profile = () => {
       getImages();
     }
   }
-  const [medications, setMedication] = useState("");
-  const [surgeries, setSurgeries] = useState("");
-  const [food, setFood] = useState("");
-  const [conditions, setConditions] = useState("");
-  const [vaccinations, setVaccines] = useState("");
-
-  const [concerns, setConcerns] = useState("");
-
-  const [pet_name, setPet_name] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { data, error } = await supabase.from("history").insert({
-      // id: pet.id,
+    const formData = new FormData(e.target);
+    const pet_name = formData.get("pet_name");
+    const medications = formData.get("medications");
+    const vaccinations = formData.get("vaccinations");
+    const surgeries = formData.get("surgeries");
+    const food = formData.get("food");
+    const conditions = formData.get("conditions");
+    const concerns = formData.get("concerns");
+    const currentPet = pets.find((pet) => pet.name === pet_name);
+    await supabase.from("history").insert({
       medications,
       surgeries,
       food,
       conditions,
       vaccinations,
       concerns,
-      pet_name,
-      //trying to make this equal to the last data id created
-      id: "7d2a28b4-fecc-4331-b326-b07277a5ebb6",
+      id: currentPet.id,
       owner_id: localStorage.getItem("user_id"),
     });
-    console.log(data, error);
+    alert(`${pet_name} has been added!`);
+    setIsCurrentPetsLength(0);
+    document.addPet.reset();
   };
 
   return (
@@ -213,10 +203,8 @@ const Profile = () => {
             </Form>
           </div>
 
-          <div></div>
-
           <div className={ProfileCSS.box2}>
-            <Form id="addPet" method="POST">
+            <Form id="addPet" name="addPet" method="POST">
               <label>
                 <input
                   className={ProfileCSS.input1}
@@ -245,15 +233,13 @@ const Profile = () => {
                   name="color"
                   placeholder="Color"
                 />
-                {/* <input
-                  type="file"
-                  name="profile_pic"
-                  /> */}
+                <input type="hidden" name="empty_pic" />
               </label>
               <button
                 type="submit"
                 name="addAnimal"
                 className={ProfileCSS.addAnimal}
+                onClick={() => setIsCurrentPetsLength(pets.length + 1)}
               >
                 Add Animal
               </button>
@@ -263,100 +249,68 @@ const Profile = () => {
               <Link to="/logout">Log Out</Link>
             </button>
           </div>
-          <div className={ProfileCSS.box3}>
-            {/* {pets.map((pet) => (
 
+          {pets.length === isCurrentPetsLength && (
+            <div className={ProfileCSS.box3}>
+              <Form name="addHistory" onSubmit={(e) => handleSubmit(e)}>
+                <input
+                  className={ProfileCSS.input2}
+                  type="text"
+                  name="pet_name"
+                  placeholder="pet name"
+                />
+                <input type="hidden" value={history.owner_id} />
+                <br />
+                <input
+                  className={ProfileCSS.input2}
+                  type="text"
+                  name="medications"
+                  placeholder="medications"
+                />
+                <br />
+                <input
+                  className={ProfileCSS.input2}
+                  type="text"
+                  name="vaccinations"
+                  placeholder="vaccines"
+                />
+                <br />
+                <input
+                  className={ProfileCSS.input2}
+                  type="text"
+                  name="surgeries"
+                  placeholder="surgeries"
+                />
+                <br />
+                <input
+                  className={ProfileCSS.input2}
+                  type="text"
+                  name="food"
+                  placeholder="diet"
+                />
+                <br />
+                <input
+                  className={ProfileCSS.input2}
+                  type="text"
+                  name="conditions"
+                  placeholder="preexisting conditions"
+                />
+                <br />
 
+                <input
+                  className={ProfileCSS.input2}
+                  type="text"
+                  name="new concerns"
+                  placeholder="any new symptoms or concerns?"
+                />
 
-
-                  <> */}
-            <form name="addHistory" onSubmit={(e) => handleSubmit(e)}>
-              {/* <input
-                        
-                        type="text"
-                        name="id"
-                        value={pet.id}
-                        onClick={() => {
-                          history.id;
-                        }}
-                      /> */}
-
-              <input
-                className={ProfileCSS.input2}
-                type="text"
-                name="pet_name"
-                placeholder="pet name"
-                onChange={(e) => {
-                  setPet_name(e.target.value);
-                }}
-              />
-              <input
-                type="hidden"
-                value={history.owner_id}
-                // onClick={() => {
-                //   history.owner_id;
-                // }}
-              />
-              <br />
-              <input
-                className={ProfileCSS.input2}
-                type="text"
-                name="petMedicine"
-                placeholder="medications"
-                onChange={(e) => setMedication(e.target.value)}
-              />
-              <br />
-              <input
-                className={ProfileCSS.input2}
-                type="text"
-                name="petVaccinations"
-                placeholder="vaccines"
-                onChange={(e) => setVaccines(e.target.value)}
-              />
-              <br />
-              <input
-                className={ProfileCSS.input2}
-                type="text"
-                name="petSurgeries"
-                placeholder="surgeries"
-                onChange={(e) => setSurgeries(e.target.value)}
-              />
-              <br />
-              <input
-                className={ProfileCSS.input2}
-                type="text"
-                name="diet"
-                placeholder="diet"
-                onChange={(e) => setFood(e.target.value)}
-              />
-              <br />
-              <input
-                className={ProfileCSS.input2}
-                type="text"
-                name="conditions"
-                placeholder="preexisting conditions"
-                onChange={(e) => setConditions(e.target.value)}
-              />
-              <br />
-
-              <input
-                className={ProfileCSS.input2}
-                type="text"
-                name="new concerns"
-                placeholder="any new symptoms or concerns?"
-                onChange={(e) => setConcerns(e.target.value)}
-              />
-
-              <br />
-              {/* <Link to="/history"> */}
-              <button className={ProfileCSS.addAnimal2} name="addHistory">
-                Add
-              </button>
-              {/* </Link> */}
-            </form>
-            {/* </>
-                ))} */}
-          </div>
+                <br />
+                <button className={ProfileCSS.addAnimal2} name="addHistory">
+                  Add
+                </button>
+              </Form>
+            </div>
+          )}
 
           <br />
 
@@ -366,12 +320,12 @@ const Profile = () => {
                 pet profiles
               </button>
             </Link>
-            <p>Click here to see your pets profiles</p>
+            <p className={ProfileCSS.p}>
+              Click here to see your
+              <br /> pets profiles
+            </p>
           </div>
 
-          {/* <div className={ProfileCSS.box4}>
-          
-          </div> */}
           <div className={ProfileCSS.box5}>
             <img
               className={ProfileCSS.imgBanner}

@@ -62,7 +62,6 @@
   background-image: linear-gradient(to right, rgb(8, 117, 8), rgb(44, 44, 184));
   margin-bottom: 30px;
   color: white;
-  
 }
 .box5 {
   grid-column-start: 1;
@@ -99,14 +98,15 @@
   margin-top: 20px;
 }
 .logout {
-  height: 40px;
-  width: 80px;
+  height: 20px;
+  width: 70px;
   background-color: rgb(71, 197, 130);
   border-radius: 8px;
   border: 2px solid rgb(25, 30, 25);
-  margin-top: 30px;
+
   cursor: pointer;
   margin-top: 20%;
+  margin-right: 100%;
 }
 .logout:hover {
   background-color: rgb(134, 139, 133);
@@ -125,7 +125,6 @@
   margin-top: 10%;
   text-align: center;
   margin-left: 65px;
- 
 }
 .petButton:hover {
   background-color: rgb(134, 139, 133);
@@ -147,4 +146,7 @@
 }
 .addAnimal2:hover {
   background-color: rgb(134, 139, 133);
+}
+.p {
+  text-align: center;
 }

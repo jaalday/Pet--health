@@ -30,7 +30,6 @@ export async function action ({request})  {
       },
       body: JSON.stringify(data),
     }).then((response) => response.json());
-    console.log("History:", addHistory);
     return addHistory
   
   

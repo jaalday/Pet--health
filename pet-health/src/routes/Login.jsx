@@ -1,72 +1,3 @@
-// import {
-//   Form,
-//   useLoaderData,
-//   Link,
-//   redirect,
-//   useActionData,
-// } from "react-router-dom";
-// import supabase from "../config/supabaseClients";
-
-// export async function action({ request }) {
-//   const formData = await request.formData();
-//   const email = formData.get("email");
-//   const password = formData.get("password");
-
-//   const data = { email, password };
-
-//   const url = `${import.meta.env.VITE_SOURCE_URL}/login`;
-
-//   const response = await fetch(url, {
-//     method: "POST",
-//     headers: {
-//       "content-Type": "application/json",
-//     },
-//     body: JSON.stringify(data),
-//   })
-
-// const statusCode = response.status;
-
-// }
-
-
-
-
-
-  
-//   .then((response) => response.json());
-//   console.log("logged on", response);
-
-  
-
-//   if(response.ok){
-//     const authResponse = await response.json();
-//     console.log("login auth response", authResponse);
-
-//     const access_token = authResponse.session.access_token;
-//     localStorage.setItem('access_token', access_token);
-//     return redirect ('/profile')
-
-//   } else{
-//     const error =await response.text();
-//     console.log("error", error)
-//   }
-// }
-
-// async function handleSubmit(e){
-//     e.preventDefault()
-
-//     try(
-//         const {data, error} = await supabase.auth.signInWithPassword({
-
-//             email: formData.email,
-//             password: formData.password
-//         })
-//         if(error) throw error
-//         console.log(data)
-
-//     )
-
-// }
 
 /* eslint-disable react-refresh/only-export-components */
 import { Form, useNavigate, useActionData } from 'react-router-dom';
@@ -126,11 +57,10 @@ const Login = () => {
         checkAuth();
     }, [response, setIsAuth, navigate]);
 
-// const Login = () => {
-//   const response = useActionData();
-//   console.log(response);
-
   return (
+    <>
+    <div className='login_img_box'>
+      <img className="image_background" src="https://www.georgeveterinaryclinic.com/userfiles/images/banner/top-veterinarian-1.jpg"/>
     <div className="login-card">
       <h1>Log In</h1>
       <Form id="login" method="POST">
@@ -147,6 +77,10 @@ const Login = () => {
         </label>
       </Form>
     </div>
+    </div>
+    <div className="login_box2">
+    </div>
+    </>
   );
 };
 
