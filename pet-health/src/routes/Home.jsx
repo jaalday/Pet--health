@@ -29,22 +29,27 @@ function Home() {
       <div className="info-box">
         <div className="inner-info1">
           <div className="card-1">
+
+            <Link to="/about">
             <img
               className="img-1"
               src="https://t2.ea.ltmcdn.com/en/posts/2/7/1/tobramycin_for_dogs_uses_dosage_and_side_effects_4172_600.jpg"
-            />
+            /></Link>
           </div>
           <div className="card-2">
+
+          <Link to="/users/add">
             <img
               className="img-2"
               src="https://www.montevistavet.com/files/turlock_vet/puppies-kittens.jpg"
-            />
+            /></Link>
           </div>
           <div className="card-3">
+            <Link to="/login">
             <img
               className="img-3"
               src="https://res.cloudinary.com/embark/images/f_auto,q_auto/v1659364976/embarkvet.com/uploads/brown-puppy-with-veterinarian/brown-puppy-with-veterinarian.jpg?_i=AA"
-            />
+            /></Link>
           </div>
 
           {/* <img  className="card-image"src="https://theanimalclinicatmissionsquare.com/wp-content/uploads/2021/01/Services-3.png"/> */}

@@ -1,6 +1,7 @@
 #root {
   max-width: 2280px;
   background-color: rgb(217, 241, 246);
+  
 
   /* padding: 2rem; */
 }
@@ -49,11 +50,27 @@
 }
 .sign-in-card {
   margin: auto;
-  width: 300px;
+  width: 30%;
   height: 300px;
-  background-color: aqua;
+  background-color: rgba(37, 50, 101, 0.7);
   text-align: center;
-  margin-top: 10%;
+  margin-top: -39%;
+  padding-top: 20px;
+  margin-bottom: 10%;
+  color: white;
+  position: relative;
+  border: 4px solid rgb(39, 175, 39);
+}
+.sign_in_banner {
+  width: 100%;
+  /* background-color: aqua; */
+  height: 500px;
+  margin-bottom: 20%;
+  margin-top: -100px;
+}
+.sign_in_img {
+  width: 100%;
+  /* margin-top: 7%; */
   margin-bottom: 10%;
 }
 .sign-in:hover {
@@ -99,7 +116,7 @@ a {
 }
 .banner {
   width: 100%;
-  margin-top: 55px;
+  /* margin-top: 55px; */
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   transform: scale(-1);
   -webkit-transform: scaleX(-1);
@@ -132,7 +149,7 @@ a {
 .inner-info1 {
   border: 2px solid white;
 
-  margin-top: 100px;
+  margin-top: 200px;
   padding-top: 10%;
   background-color: rgb(51, 67, 113);
   height: 200%;
@@ -144,11 +161,9 @@ a {
 .card-1 {
   width: 30%;
   height: 350px;
-  /* background-color: aliceblue; */
+
   display: inline-block;
   margin-left: 30px;
-
-  /* background-image: url('https://thumbs.dreamstime.com/b/professional-female-veterinary-nurse-checking-pet-dog-eyes-29924256.jpg'); */
 }
 .img-1 {
   /* margin-top: -15px; */
@@ -211,31 +226,20 @@ a {
   margin-left: 5%;
 }
 .login_img_box {
-  /* display: inline-block; */
-  /* border: 2px solid black; */
   height: 620px;
-  width: 70%;
+  width: 100%;
   margin: auto;
-  margin-top: 40px;
-  margin-bottom: 40px;
-}
-/* .login_box2{
-  display: inline-block;
-  border: 2px solid black;
-  height: 620px;
-  width: 30%;
-  margin-left: 10px;
-  margin-top: 20px;
-  
 
-} */
+  margin-bottom: 10%;
+}
+
 .login-card {
   width: 30%;
   height: 300px;
   background-color: rgba(44, 63, 101, 0.7);
   text-align: center;
   margin: auto;
-  margin-top: -400px;
+  margin-top: -500px;
 
   border: 4px solid rgb(83, 178, 55);
   padding-bottom: 40px;
@@ -245,7 +249,7 @@ a {
   box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .image_background {
-  margin-top: 100px;
+  /* margin-top: 100px; */
   width: 100%;
   /* position: static; */
 }
@@ -267,48 +271,109 @@ a {
 .petCard {
   border: 2-x solid black;
 }
-@media (orientation: portrait) {
+@media (max-width: 600px) {
   .nav-text {
     display: flex;
     justify-content: space-around;
+
+   
+
   }
   .navBar {
-    height: 15%;
+    height: 70px;
   }
   .logo {
-    width: 10%;
+    width: 20%;
   }
+
   .footer-box {
     display: flex;
     height: 100px;
   }
+
+  .h2 {
+    color: transparent;
+  }
   .h1 {
-    margin-top: 250px;
+    margin-top: 1px;
     width: 100%;
     padding: 0;
-    height: 25%;
-    display: flex;
-    margin-bottom: 50px;
-    /* margin-right: -40px; */
+    height: fit-content;
+    border-radius: 0;
+    position: relative;
+    border-top: 3px solid green;
+    border-bottom: 3px solid green;
+
     margin-left: 0;
     text-align: center;
   }
+  .sign-in {
+    /* z-index: 2; */
+    /* margin-top: 280px; */
+    /* margin-left: 5px; */
+    float: left;
+    width: 80px;
+    height: 30px;
+    background-color: rgb(59, 149, 59);
+  }
   .img-1 {
-    margin-top: 100px;
-    width: 100%;
-    height: 30%;
+    display: block;
+    margin-top: 200px;
+    width: 300px;
+    height: 60%;
   }
   .img-2 {
-    width: 100%;
-    height: 30%;
-    margin-left: 50%;
+    display: block;
+
+    width: 250%;
+    height: 60%;
+    margin-right: 40px;
+    margin-left: -120px;
+    margin-bottom: 30px;
   }
   .img-3 {
-    width: 100%;
-    height: 30%;
-    margin-bottom: 300px;
+    display: block;
+    width: 270%;
+    height: 70%;
+    margin-top: 100px;
+    /* margin-bottom: 300px; */
   }
   .inner-info1 {
-    height: 400px;
+    height: fit-content;
   }
+  .login-card {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 0;
+  }
+  .image_background {
+    margin-top: 0;
+  }
+  .login-button {
+    background-color: rgb(69, 160, 69);
+    border: 2px solid rgb(49, 49, 137);
+  }
+  .about-image {
+    height: auto;
+    margin-top: 0;
+  }
+  .about-container {
+    height: fit-content;
+    text-align: center;
+    width: 100%;
+  }
+  .about-text {
+    text-align: center;
+    color: rgb(48, 48, 133);
+    margin-right: 10px;
+  }
+  .sign-in-card {
+    width: 100%;
+    margin-top: -30px;
+  }
+  .sign_in_img {
+    margin-top: 0;
+  }
+}
+@media (min-width: 601px) {
 }

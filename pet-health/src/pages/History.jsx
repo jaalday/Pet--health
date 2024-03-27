@@ -38,8 +38,6 @@ const History = () => {
     fetchPets();
   }, []);
 
-
-
   const { id } = useParams();
 
   const [fetchError, setFetchError] = useState([]);
@@ -52,10 +50,8 @@ const History = () => {
   const [vaccinations, setVaccines] = useState("");
 
   const [concerns, setConcerns] = useState("");
- 
 
   const handleSubmit = async ({ historyId }) => {
-
     const { data, error } = await supabase
       .from("history")
       .update({
@@ -102,20 +98,30 @@ const History = () => {
     getPetsId();
   }, []);
 
+  const handleDelete = async ({ petId }) => {
+    const { data, error } = await supabase
+      .from("history")
+      .delete()
+      .eq("id", petId);
+
+    if (error) {
+      console.log(error);
+    }
+    if (data) {
+      console.log(data);
+    }
+  };
+
   return (
     <>
-    
       {fetchError && <p>{fetchError}</p>}
       {history && (
         <div className="pets">
           {history.map((history) => (
             <>
-              {/* <li key={history.id}> */}
               <div className={PetCardCSS.petCard}>
                 <h1>{history.pet_name}</h1>
                 <div className={PetCardCSS.medInfo}>
-                  {/* <h3>Id: {history.id}</h3> */}
-
                   <h3>medication: {history.medications}</h3>
 
                   <h3>vaccinations: {history.vaccinations}</h3>
@@ -127,10 +133,8 @@ const History = () => {
                 </div>
                 <div className={PetCardCSS.inputBox}>
                   <Form
-                    method="PUT"
+                    method="POST"
                     onSubmit={() => handleSubmit({ historyId: history.id })}
-                     
-                   
                   >
                     <input
                       // className={PetCardCSS.inputSquares}
@@ -205,14 +209,19 @@ const History = () => {
                       onChange={(e) => setConcerns(e.target.value)}
                     />
                     <br />
-                   
+
                     <button name="addHistory">Update</button>
-                  
                   </Form>
                 </div>
-                
+                <br />
+                <button
+                  className={PetCardCSS.delete_history}
+                  type="submit"
+                  onClick={() => handleDelete({ petId: history.id })}
+                >
+                  delete
+                </button>
               </div>
-            
             </>
           ))}
         </div>

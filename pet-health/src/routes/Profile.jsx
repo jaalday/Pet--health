@@ -161,6 +161,7 @@ const Profile = () => {
       vaccinations,
       concerns,
       id: currentPet.id,
+      pet_name,
       owner_id: localStorage.getItem("user_id"),
     });
     alert(`${pet_name} has been added!`);
@@ -250,7 +251,7 @@ const Profile = () => {
             </button>
           </div>
 
-          {pets.length === isCurrentPetsLength && (
+          {pets.length && pets.length === isCurrentPetsLength && (
             <div className={ProfileCSS.box3}>
               <Form name="addHistory" onSubmit={(e) => handleSubmit(e)}>
                 <input
@@ -331,10 +332,7 @@ const Profile = () => {
               className={ProfileCSS.imgBanner}
               src="https://www.vetspetclinic.com/userfiles/images/banner/leading-spaying-and-neutering-5.jpg"
             />
-            {/* <img
-              className={ProfileCSS.imgBanner}
-              src="https://www.petsnvets.org/images/headers/ph4l/47334_NEW-PH4L_Web_Internal_1920x489_PetsnVets.jpg"
-            /> */}
+          
           </div>
         </div>
       </div>

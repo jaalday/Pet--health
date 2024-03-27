@@ -36,10 +36,7 @@ const PetImages = ({ petId }) => {
 
   console.log("images", images);
 
-  if (images.length < 1)
-    return (
-      <img src="https://t3.ftcdn.net/jpg/01/79/88/20/360_F_179882080_Zga46fOuCNnZlF9o2IC6gYgHVQFDVKMv.jpg" />
-    );
+  if (images.length < 1) return <img className={PetCardCSS.petImage}src="https://www.shutterstock.com/image-vector/black-silhouette-cat-vector-illustration-600nw-713943364.jpg" />;
   return (
     <div>
       {images.map((image) => {
@@ -57,19 +54,13 @@ const PetImages = ({ petId }) => {
   );
 };
 
-const deleteImage = async () => {
-  const { error } = await supabase.from("pets").delete(fileKey);
 
-  if (error) {
-    error;
-  }
-};
 
 const PetCard = () => {
   const [fetchError, setFetchError] = useState(null);
   const [pets, setPets] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-
+const user = localStorage.getItem("user_id")
   useEffect(() => {
     const fetchPets = async () => {
       const { data, error } = await supabase
@@ -166,11 +157,6 @@ const PetCard = () => {
                   >
                     X
                   </button>
-                  <div>
-                    <button type="submit" onClick={(e) => deleteImage(e)}>
-                      delete pic
-                    </button>
-                  </div>
                 </div>
               </div>
             ))}
