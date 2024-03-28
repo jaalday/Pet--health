@@ -246,10 +246,10 @@ const Profile = () => {
                 Add Animal
               </button>
             </Form>
-
-            <button onClick={() => Logout()} className={ProfileCSS.logout}>
+            {/* <Link to="/logout">Logout</Link> */}
+            {/* <button onClick={() => Logout()} className={ProfileCSS.logout}>
               log out
-            </button>
+            </button> */}
           </div>
 
           {pets.length && pets.length === isCurrentPetsLength && (
@@ -333,7 +333,6 @@ const Profile = () => {
               className={ProfileCSS.imgBanner}
               src="https://www.vetspetclinic.com/userfiles/images/banner/leading-spaying-and-neutering-5.jpg"
             />
-          
           </div>
         </div>
       </div>

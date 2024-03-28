@@ -29,21 +29,29 @@ const Navigation = ({ navItems }) => {
               <Link to="/about" className="nav-text">
                 About
               </Link>
-              <Link to="/users/add" className="nav-text">
-                Signup
-              </Link>
+
               {isAuth ? (
-                <Link to="/profile" className="nav-text">
-                  Profile
-                </Link>
+                <>
+                  <Link to="/profile" className="nav-text">
+                    Profile
+                  </Link>
+                  <Link to="/logout">Logout</Link>
+                </>
               ) : (
-                <Link to="/login"></Link>
+                <>
+                  <Link to="/users/add" className="nav-text">
+                    Signup
+                  </Link>
+                  <Link to="/login" className="nav-text">
+                    Login
+                  </Link>
+                </>
               )}
             </div>
           </div>
-          <Link to="./login">
+          {/* <Link to="./login">
             <button className="sign-in">Log In</button>
-          </Link>
+          </Link> */}
         </div>
       </nav>
     </>
