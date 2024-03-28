@@ -1,4 +1,4 @@
-import { useLoaderData, Navigate } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { useAuth } from "../AuthContext";
 
 
@@ -22,17 +22,17 @@ export async function loader() {
 }
 
 const Logout = () => {
-
+const navigate = useNavigate()
     const response = useLoaderData();
     const { setIsAuth } = useAuth();
 
     if (response) {
         localStorage.clear();
         setIsAuth(false);
-        return <Navigate to='/'/>;
+        return navigate("/");
     } else {
         alert ('WOOF WOOF cant log out');
-        return <Navigate to='/'/>;
+        return navigate("/");
     }
 
 }

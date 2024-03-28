@@ -273,8 +273,9 @@ a {
 }
 @media (max-width: 600px) {
   .nav-text {
-    display: flex;
-    justify-content: space-around;
+   
+    /* justify-content: space-around; */
+    float: right;
 
    
 
@@ -303,7 +304,7 @@ a {
     margin-top: 1px;
     width: 100%;
     padding: 0;
-    height: 200px;
+    height: 120px;
     border-radius: 0;
     position: relative;
     border-top: 3px solid green;
@@ -378,6 +379,9 @@ a {
   }
   .sign_in_img {
     margin-top: 0;
+  }
+  .bottom-logo{
+  width:50px
   }
 }
 @media (min-width: 601px) {

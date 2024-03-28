@@ -41,7 +41,7 @@ const AddUser = () => {
         />
         <div className="sign-in-card">
           <h1>Sign-Up</h1>
-          <Form id="addUser" onSubmit={handleSubmit}>
+          <form id="addUser" onSubmit={handleSubmit}>
             <label>
               Email:
               <input
@@ -65,12 +65,11 @@ const AddUser = () => {
 
             <br />
             <br />
-            <Link to="/login">
-              <button className="login-button" type="submit">
-                Sign-up
-              </button>
-            </Link>
-          </Form>
+
+            <button className="login-button" type="submit">
+              Sign-up
+            </button>
+          </form>
         </div>
       </div>
     </>

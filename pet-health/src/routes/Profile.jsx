@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import ProfileCSS from "./Profile.module.css";
 import supabase from "../config/supabaseClients";
 import { v4 as uuidv4 } from "uuid";
+import Logout from "./Logout";
 
 export async function action({ request }) {
   const formData = await request.formData();
@@ -246,8 +247,8 @@ const Profile = () => {
               </button>
             </Form>
 
-            <button className={ProfileCSS.logout}>
-              <Link to="/logout">Log Out</Link>
+            <button onClick={(e) => Logout()} className={ProfileCSS.logout}>
+              log out
             </button>
           </div>
 
