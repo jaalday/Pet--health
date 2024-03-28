@@ -15,7 +15,7 @@ function Footer () {
              
                 <p>About</p>
                 <p>Questions</p>
-                <p>Terms of Service</p>
+               
             </div>
             <div className="item-3">
                 <p>Helpful Websites</p>

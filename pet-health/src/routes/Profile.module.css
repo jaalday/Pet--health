@@ -186,7 +186,7 @@
   }
   .logout {
     z-index: 4;
-    margin-top: 550px;
+    /* margin-top: 550px; */
     /* margin-right: 5px; */
     margin-left: -30px;
     width: 60px;
