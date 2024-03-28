@@ -35,14 +35,16 @@ const Navigation = ({ navItems }) => {
                   <Link to="/profile" className="nav-text">
                     Profile
                   </Link>
-                  <Link to="/logout">Logout</Link>
+                  <Link className="nav-log-out" to="/logout">
+                    Logout
+                  </Link>
                 </>
               ) : (
                 <>
                   <Link to="/users/add" className="nav-text">
                     Signup
                   </Link>
-                  <Link to="/login" className="nav-text">
+                  <Link to="/login" className="nav-log-out">
                     Login
                   </Link>
                 </>
