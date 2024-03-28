@@ -302,7 +302,7 @@ const Profile = () => {
                 <input
                   className={ProfileCSS.input2}
                   type="text"
-                  name="new concerns"
+                  name="concerns"
                   placeholder="any new symptoms or concerns?"
                 />
 
