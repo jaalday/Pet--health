@@ -247,7 +247,7 @@ const Profile = () => {
               </button>
             </Form>
 
-            <button onClick={(e) => Logout()} className={ProfileCSS.logout}>
+            <button onClick={() => Logout()} className={ProfileCSS.logout}>
               log out
             </button>
           </div>

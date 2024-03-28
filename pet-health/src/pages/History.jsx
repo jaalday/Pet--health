@@ -216,7 +216,7 @@ const History = () => {
                     />
                     <br />
 
-                    <button name="addHistory" type="submit">
+                    <button className={PetCardCSS.update} name="addHistory" type="submit">
                       Update
                     </button>
                   </form>

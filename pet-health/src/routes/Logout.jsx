@@ -31,7 +31,7 @@ const navigate = useNavigate()
         setIsAuth(false);
         return navigate("/");
     } else {
-        alert ('WOOF WOOF cant log out');
+        alert ('oops cant log out.. you stuck here');
         return navigate("/");
     }
 

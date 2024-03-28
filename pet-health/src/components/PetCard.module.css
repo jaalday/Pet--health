@@ -12,9 +12,7 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   word-spacing: 3px;
   letter-spacing: 1px;
-  background-image: linear-gradient(
-    to top, rgb(75, 78, 82),rgb(62, 71, 148)
-  );
+  background-image: linear-gradient(to top, rgb(75, 78, 82), rgb(62, 71, 148));
 }
 .petCard1 {
   margin: auto;
@@ -30,7 +28,7 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   word-spacing: 3px;
   letter-spacing: 1px;
-  background-image: linear-gradient(to top, rgb(75, 78, 82),rgb(62, 71, 148));
+  background-image: linear-gradient(to top, rgb(75, 78, 82), rgb(62, 71, 148));
 }
 
 .button {
@@ -122,6 +120,31 @@
   height: 120px;
   animation: spin 2s linear infinite;
 }
+.update {
+  height: 30px;
+  width: 60px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  background-color: rgb(71, 172, 71);
+  border-radius: 5px;
+  border: 2px solid rgb(45, 100, 53);
+}
+.update:hover {
+  background-color: rgb(153, 150, 150);
+}
+.delete_history {
+  height: 35px;
+  width: 70px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  background-color: rgb(71, 172, 71);
+  border-radius: 5px;
+  border: 2px solid rgb(45, 100, 53);
+}
+.delete_history:hover {
+  background-color: rgb(153, 150, 150);
+}
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -134,24 +157,32 @@
 .placeholder_img {
   width: 40%;
 }
-.delete_history{
+.delete_history {
   text-align: center;
 }
 @media (max-width: 600px) {
-  .petCard1{
+  .petCard1 {
     width: 90%;
   }
-  .petInfo{
+  .petInfo {
     margin-top: -200px;
     margin-right: 0;
     width: 120px;
     margin-left: 55%;
- 
   }
-  .petImage{
-    width:50%;
+  .petImage {
+    width: 50%;
     margin-left: 0;
   }
+  .petCard {
+    width: 100%;
 
-
+    display: block;
+  }
+  .medInfo {
+    display: block;
+  }
+  .inputBox {
+    width: fit-content;
+  }
 }
