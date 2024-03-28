@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import supabase from "../config/supabaseClients";
 import PetCardCSS from "../components/PetCard.module.css";
-import { Form } from "react-router-dom";
 
 const History = () => {
   async function getPetsId() {
@@ -16,27 +15,27 @@ const History = () => {
     return getPetsId;
   }
 
-  const user = localStorage.getItem("user_id");
+  // const user = localStorage.getItem("user_id");
 
-  const [pets, setPets] = useState(null);
-  useEffect(() => {
-    const fetchPets = async () => {
-      const { data, error } = await supabase
-        .from("pets")
-        .select("id")
-        .eq("owner_id", user);
+  // const [pets, setPets] = useState(null);
+  // useEffect(() => {
+  //   const fetchPets = async () => {
+  //     const { data, error } = await supabase
+  //       .from("pets")
+  //       .select("id")
+  //       .eq("owner_id", user);
 
-      if (error) {
-        setFetchError("could not fetch pets info");
-        setPets(null);
-      }
-      if (data) {
-        setPets(data);
-        setFetchError(null);
-      }
-    };
-    fetchPets();
-  }, []);
+  //     if (error) {
+  //       setFetchError("could not fetch pets info");
+  //       setPets(null);
+  //     }
+  //     if (data) {
+  //       setPets(data);
+  //       setFetchError(null);
+  //     }
+  //   };
+  //   fetchPets();
+  // }, []);
 
   const { id } = useParams();
 
@@ -51,7 +50,8 @@ const History = () => {
 
   const [concerns, setConcerns] = useState("");
 
-  const handleSubmit = async ({ historyId }) => {
+  const handleSubmit = async ({ e, historyId }) => {
+    e.preventDefault();
     const { data, error } = await supabase
       .from("history")
       .update({
@@ -79,7 +79,6 @@ const History = () => {
         .from("history")
         .select()
         .eq("owner_id", owner_id);
-      // .single();
 
       if (error) {
         setFetchError("could not fetch history info");
@@ -99,16 +98,24 @@ const History = () => {
   }, []);
 
   const handleDelete = async ({ petId }) => {
-    const { data, error } = await supabase
-      .from("history")
-      .delete()
-      .eq("id", petId);
-
+    const { error } = await supabase.from("history").delete().eq("id", petId);
+    const owner_id = localStorage.getItem("user_id");
     if (error) {
-      console.log(error);
-    }
-    if (data) {
-      console.log(data);
+      console.log("HISTORY ERROR", error);
+      // Jaclyn will add error messaging here... :)
+      return;
+    } else {
+      const { data, error } = await supabase
+        .from("history")
+        .select()
+        .eq("owner_id", owner_id);
+      if (data) {
+        setHistory(data);
+        setFetchError(null);
+      }
+      if (error) {
+        console.error("ERROR:", error);
+      }
     }
   };
 
@@ -132,9 +139,8 @@ const History = () => {
                   <br />
                 </div>
                 <div className={PetCardCSS.inputBox}>
-                  <Form
-                    method="POST"
-                    onSubmit={() => handleSubmit({ historyId: history.id })}
+                  <form
+                    onSubmit={(e) => handleSubmit({ e, historyId: history.id })}
                   >
                     <input
                       // className={PetCardCSS.inputSquares}
@@ -210,13 +216,15 @@ const History = () => {
                     />
                     <br />
 
-                    <button name="addHistory">Update</button>
-                  </Form>
+                    <button name="addHistory" type="submit">
+                      Update
+                    </button>
+                  </form>
                 </div>
                 <br />
                 <button
                   className={PetCardCSS.delete_history}
-                  type="submit"
+                  type="button"
                   onClick={() => handleDelete({ petId: history.id })}
                 >
                   delete

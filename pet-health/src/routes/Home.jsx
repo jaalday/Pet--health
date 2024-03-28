@@ -16,7 +16,7 @@ function Home() {
       />{" "}
       <div className="h1">
         <h1>Pet MD</h1>
-        <p>
+        <p className="text-title">
           A place to keep track of your
           <br />
           pets medical information

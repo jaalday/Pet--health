@@ -112,6 +112,7 @@ const user = localStorage.getItem("user_id")
     }
   };
 
+
   return (
     <>
       <div>
@@ -136,8 +137,10 @@ const user = localStorage.getItem("user_id")
                       <div className={PetCardCSS.loader}></div>
                     ) : (
                       <PetImages petId={pet.id} />
+                      
                     )}
                   </div>
+                
 
                   <div className={PetCardCSS.petInfo}>
                     <p>age: {pet.age}</p>

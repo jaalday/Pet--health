@@ -9,7 +9,7 @@ import Profile, { action as addPetAction } from "../routes/Profile";
 import Login, { action as loginAction } from "../routes/Login";
 import PetProfile1 from "../routes/PetProfile1";
 import Error from "../pages/Error";
-import Logout, {loader as logoutLoader} from "./Logout";
+import Logout, { loader as logoutLoader } from "./Logout";
 import { useAuth } from "../AuthContext";
 import AddHistory from "../components/AddHistory";
 import History from "../pages/History";
@@ -39,24 +39,21 @@ const Routes = () => {
           path: "/login",
           element: <Login />,
           action: loginAction,
-          
         },
         {
-            path: "/logout",
-            element: <Logout/>,
-            loader: logoutLoader,
+          path: "/logout",
+          element: <Logout />,
+          loader: logoutLoader,
         },
-     
+
         {
-          path: '/history',
-          element: <History/>,
+          path: "/history",
+          element: <History />,
         },
         {
-          path: '/addhistory',
-          element: <AddHistory/>
-        }
-      
-      
+          path: "/addhistory",
+          element: <AddHistory />,
+        },
       ],
     },
   ];
@@ -68,7 +65,7 @@ const Routes = () => {
       children: [
         {
           path: "/profile",
-          element: <Profile  />,
+          element: <Profile />,
           action: addPetAction,
         },
 

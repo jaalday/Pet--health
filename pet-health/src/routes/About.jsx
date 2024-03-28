@@ -13,12 +13,11 @@ function About() {
           <h1>About Pet MD</h1>
           <h3>
             Pet MD is a place where you can keep and track your pets medical
-            information. You can also upload vaccination records so you dont
-            have to bring stacks of paper to the vet
+            information.
           </h3>
       
           <h3>
-            keep track of any new health issues and concerns with your animal
+            keep a record of any new health issues and concerns with your animal.
           </h3>
         </div>
       </div>

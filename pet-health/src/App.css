@@ -290,6 +290,11 @@ a {
     display: flex;
     height: 100px;
   }
+  .text-title{
+    display: block;
+    color: rgb(83, 192, 83);
+    
+  }
 
   .h2 {
     color: transparent;
@@ -298,7 +303,7 @@ a {
     margin-top: 1px;
     width: 100%;
     padding: 0;
-    height: fit-content;
+    height: 200px;
     border-radius: 0;
     position: relative;
     border-top: 3px solid green;
