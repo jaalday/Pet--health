@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import supabase from "../config/supabaseClients";
 import PetCardCSS from "../components/PetCard.module.css";
+import { Link } from "react-router-dom";
 
 const History = () => {
   async function getPetsId() {
@@ -15,27 +16,8 @@ const History = () => {
     return getPetsId;
   }
 
-  // const user = localStorage.getItem("user_id");
 
-  // const [pets, setPets] = useState(null);
-  // useEffect(() => {
-  //   const fetchPets = async () => {
-  //     const { data, error } = await supabase
-  //       .from("pets")
-  //       .select("id")
-  //       .eq("owner_id", user);
-
-  //     if (error) {
-  //       setFetchError("could not fetch pets info");
-  //       setPets(null);
-  //     }
-  //     if (data) {
-  //       setPets(data);
-  //       setFetchError(null);
-  //     }
-  //   };
-  //   fetchPets();
-  // }, []);
+  
 
   const { id } = useParams();
 
@@ -234,6 +216,7 @@ const History = () => {
           ))}
         </div>
       )}
+      <Link to="/error"></Link>
     </>
   );
 };

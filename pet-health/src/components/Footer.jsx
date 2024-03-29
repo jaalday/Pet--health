@@ -1,3 +1,7 @@
+import { Link } from "react-router-dom"
+
+
+
 function Footer () {
     
     
@@ -18,7 +22,7 @@ function Footer () {
                
             </div>
             <div className="item-3">
-                <p>Helpful Websites</p>
+                <Link to="/blaaa"><p>Helpful Websites</p></Link>
                 <p>FAQ</p>
                 <p>Profile</p>
             </div>

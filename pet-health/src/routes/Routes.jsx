@@ -53,7 +53,8 @@ const Routes = () => {
         {
           path: "/addhistory",
           element: <AddHistory />,
-        },
+        }
+      
       ],
     },
   ];
