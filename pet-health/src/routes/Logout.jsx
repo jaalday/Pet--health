@@ -3,7 +3,7 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import { useAuth } from "../AuthContext";
 
 export async function loader() {
-  const url = "http://localhost:8000/logout";
+  const url = `${import.meta.env.VITE_SOURCE_URL}/logout`;
 
   const access_token = localStorage.getItem("access_token");
 
