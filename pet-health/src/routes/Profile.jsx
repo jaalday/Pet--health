@@ -11,6 +11,7 @@ export async function action({ request }) {
   const age = formData.get("petAge");
   const species = formData.get("species");
   const color = formData.get("color");
+  const gender = formData.get("gender");
   const empty_pic = formData.get("empty_pic");
 
   const data = {
@@ -19,6 +20,7 @@ export async function action({ request }) {
     age,
     species,
     color,
+    gender,
     empty_pic,
   };
   const url = `${import.meta.env.VITE_SOURCE_URL}/profile`;
@@ -235,6 +237,7 @@ const Profile = () => {
                   name="color"
                   placeholder="Color"
                 />
+                <input type="text" name="gender" placeholder="gender"/>
                 <input type="hidden" name="empty_pic" />
               </label>
               <button
