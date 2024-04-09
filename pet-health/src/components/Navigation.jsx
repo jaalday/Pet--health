@@ -35,7 +35,7 @@ const Navigation = ({ navItems }) => {
                   <Link to="/profile" className="nav-text">
                     Profile
                   </Link>
-                  <Link to="/petprofile1 className="nav-text">Pet Profile</Link>
+            
                   <Link className="nav-log-out" to="/logout">
                     Logout
                   </Link>
