@@ -13,6 +13,7 @@ class Pets(Base):
     age = Column(String)
     species = Column(String)
     color = Column(String)
+    gender = Column(String)
     owner_id = Column(String)
    
     
@@ -26,6 +27,7 @@ class Pets(BaseModel):
     age: str
     species: str
     color: str
+    gender: str
     owner_id: str
  
    
