@@ -237,7 +237,7 @@ const Profile = () => {
                   name="color"
                   placeholder="Color"
                 />
-                <input type="text" name="gender" placeholder="gender"/>
+                <input className={ProfileCSS.input1} type="text" name="gender" placeholder="gender"/>
                 <input type="hidden" name="empty_pic" />
               </label>
               <button
