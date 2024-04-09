@@ -146,6 +146,7 @@ const user = localStorage.getItem("user_id")
                     <p>age: {pet.age}</p>
                     <p>color: {pet.color}</p>
                     <p>species: {pet.species}</p>
+                    <p>gender: {pet.gender}</p>
                     <Link to={"/history"}>
                       <button type="submit" className={PetCardCSS.button}>
                         history
